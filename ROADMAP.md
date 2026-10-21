@@ -8,9 +8,9 @@ can stay small while the vision stays whole. Ordered loosely from "next" to
 
 ## V1.x — finishing the recorder
 
-- **Real field recordings.** Swap the sketched birds, crickets, ocean, river,
-  rain and wind for Stu's own recordings. One-line change per layer in
-  `data/layers.ts` (`make: fileSound('audio/ocean.mp3')`).
+- ~~**Real field recordings.**~~ Done 2026-10-21: birds, crickets, ocean,
+  river and thunderstorm are Stu's own; the synthesised sketches are gone.
+  More to come (wind, fire, a temple, a forest at night…).
 - **More of the 12 keys.** The app ships 3-minute excerpts (crossfade-looped)
   because the full 56-minute files are 134 MB each, over GitHub's 100 MB file
   limit. Options: host the full files elsewhere (Cloudflare R2, a Drive

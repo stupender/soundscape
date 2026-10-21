@@ -36,17 +36,11 @@ const paths: Record<IconId, React.ReactNode> = {
       <circle cx="25" cy="30" r="1" />
     </>
   ),
-  rain: (
+  storm: (
     <>
       <path d="M14 18a8 8 0 0 1 15-4 6 6 0 1 1 3 11H15a5 5 0 0 1-1-7z" />
-      <path d="M15 31l-2 5M22 31l-2 5M29 31l-2 5M18 39l-1.5 4M25 39l-1.5 4" />
-    </>
-  ),
-  wind: (
-    <>
-      <path d="M4 18h24a5 5 0 1 0-5-5" />
-      <path d="M4 26h32a5 5 0 1 1-5 5" />
-      <path d="M4 34h14" />
+      <path d="M24 27l-3 6h5l-3 7" />
+      <path d="M15 31l-2 5M33 31l-2 5M17 39l-1.5 4" />
     </>
   ),
   shruti: (

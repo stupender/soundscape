@@ -129,7 +129,7 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
       <div className="tiles">
         {all.map((def, i) => {
           const s = stateOf(def.id);
-          const fact = s.on ? 'on' : def.pitched ? `Sa ${keyNow.name}` : '';
+          const fact = s.on ? 'on' : def.pitched ? `Key ${keyNow.name}` : '';
           return (
             <div key={def.id} className={`tile ${s.on ? 'tile--on' : ''}`} style={{ '--tint': def.tint } as React.CSSProperties}>
               <button className="tile-face" onClick={() => toggle(def)} aria-pressed={s.on} aria-label={`${def.name}, ${def.note}`} />

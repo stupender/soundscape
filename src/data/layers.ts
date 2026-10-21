@@ -10,16 +10,17 @@
 //              the same level when you first turn it on
 //   pitched  — true if it follows the key
 //
-// To swap a sketched sound for a real field recording later, change `make`
-// to `fileSound('audio/ocean.mp3')` and drop the file into public/audio/.
-import { birds, crickets } from '../audio/creatures.ts';
+// THE FIELD RECORDINGS are Stu's own (Sound Collection/Field Recordings),
+// cut to a few minutes each and levelled to the same loudness (−18 LUFS) so
+// they sit together; they loop with a crossfade. How they were cut is in
+// MAINTENANCE.md. To add another: drop an MP3 into public/audio/field/ and
+// add an entry with `make: fileSound('audio/field/name.mp3')`.
 import { shrutiBox, tanpura } from '../audio/drones.ts';
-import { keysSound } from '../audio/loop.ts';
-import { ocean, rain, river, wind } from '../audio/nature.ts';
+import { fileSound, keysSound } from '../audio/loop.ts';
 import type { SoundMaker } from '../audio/sound.ts';
 
 export type IconId =
-  | 'birds' | 'crickets' | 'ocean' | 'river' | 'rain' | 'wind'
+  | 'birds' | 'crickets' | 'ocean' | 'river' | 'storm'
   | 'shruti' | 'tanpura' | 'keys' | 'upload';
 
 export interface LayerDef {
@@ -38,14 +39,13 @@ export interface LayerDef {
 
 export const LAYERS: LayerDef[] = [
   { id: 'keys', name: 'Soundscape', note: 'in 12 keys · Point Reyes', icon: 'keys', tint: 'var(--night)', make: keysSound, gain: 1, pitched: true, image: 'images/point-reyes.jpg' },
-  { id: 'shruti', name: 'Shruti box', note: 'Sa · Pa · Sa', icon: 'shruti', tint: 'var(--clay)', make: shrutiBox, gain: 0.9, pitched: true },
-  { id: 'tanpura', name: 'Tanpura', note: 'Pa · Sa · Sa · Sa', icon: 'tanpura', tint: 'var(--timber)', make: tanpura, gain: 1.2, pitched: true },
-  { id: 'birds', name: 'Birds', note: 'morning', icon: 'birds', tint: 'var(--sage)', make: birds, gain: 0.9 },
-  { id: 'crickets', name: 'Crickets', note: 'evening', icon: 'crickets', tint: 'var(--lav)', make: crickets, gain: 1 },
-  { id: 'ocean', name: 'Ocean', note: 'waves arriving', icon: 'ocean', tint: 'var(--slate)', make: ocean, gain: 0.8 },
-  { id: 'river', name: 'River', note: 'over stones', icon: 'river', tint: 'var(--riso-blue)', make: river, gain: 0.5 },
-  { id: 'rain', name: 'Rain', note: 'on leaves', icon: 'rain', tint: 'var(--slate)', make: rain, gain: 0.6 },
-  { id: 'wind', name: 'Wind', note: 'in the open', icon: 'wind', tint: 'var(--muted-tint)', make: wind, gain: 0.7 },
+  { id: 'shruti', name: 'Shruti box', note: 'root · fifth · octave', icon: 'shruti', tint: 'var(--clay)', make: shrutiBox, gain: 0.9, pitched: true },
+  { id: 'tanpura', name: 'Tanpura', note: 'fifth · root · root · low root', icon: 'tanpura', tint: 'var(--timber)', make: tanpura, gain: 1.2, pitched: true },
+  { id: 'birds', name: 'Morning birds', note: 'Pennsylvania', icon: 'birds', tint: 'var(--sage)', make: fileSound('audio/field/birds-pennsylvania.mp3'), gain: 1 },
+  { id: 'crickets', name: 'Evening crickets', note: 'Serenity Ridge, Virginia', icon: 'crickets', tint: 'var(--lav)', make: fileSound('audio/field/crickets-virginia.mp3'), gain: 1 },
+  { id: 'ocean', name: 'Pacific Ocean', note: 'Monterey coast, Carmel', icon: 'ocean', tint: 'var(--slate)', make: fileSound('audio/field/ocean-monterey.mp3'), gain: 1 },
+  { id: 'river', name: 'River', note: 'stone waterfall, Virginia', icon: 'river', tint: 'var(--riso-blue)', make: fileSound('audio/field/waterfall-virginia.mp3'), gain: 1 },
+  { id: 'storm', name: 'Thunderstorm', note: 'Illinois', icon: 'storm', tint: 'var(--night)', make: fileSound('audio/field/thunderstorm-illinois.mp3'), gain: 1.25 },
 ];
 
 /** A preset turns on a few layers at chosen levels (0–1). */
@@ -56,8 +56,8 @@ export interface Preset {
 
 export const PRESETS: Preset[] = [
   { name: 'Dawn', layers: { birds: 0.7, river: 0.45, shruti: 0.45 } },
-  { name: 'Dusk', layers: { crickets: 0.7, tanpura: 0.6, wind: 0.25 } },
+  { name: 'Dusk', layers: { crickets: 0.7, tanpura: 0.6 } },
   { name: 'Shore', layers: { ocean: 0.75, keys: 0.6 } },
-  { name: 'Rain room', layers: { rain: 0.65, shruti: 0.5 } },
+  { name: 'Storm', layers: { storm: 0.65, shruti: 0.45 } },
   { name: 'Practice', layers: { tanpura: 0.8, shruti: 0.35 } },
 ];

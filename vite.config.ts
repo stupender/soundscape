@@ -2,14 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // Vite configuration.
-// `base` is the URL path the built app is served from once deployed.
-// GitHub Pages serves a project repo at https://stupender.github.io/soundscape/
-// so every asset link in the built site is prefixed with "/soundscape/".
-// In local dev Vite serves from "/", so `npm run dev` is unaffected.
-// If the repo is ever renamed, change this string to match.
+// `base: './'` makes every link in the built site RELATIVE, so the same
+// files work wherever they're served: at soundscapes.beingsound.studio (the
+// site's root) and at https://stupender.github.io/soundscape/ (a sub-folder).
+// No need to change it if the repo or the domain is renamed.
 export default defineConfig({
   plugins: [react()],
-  base: '/soundscape/',
+  base: './',
   // `host: true` lets a phone on the same Wi-Fi open the dev server.
   // (The microphone still needs HTTPS or localhost — see MAINTENANCE.md.)
   server: { host: true },

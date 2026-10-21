@@ -28,7 +28,9 @@ public/       recorder-worklet.js, fonts, the 12-keys audio excerpts, images.
 ```
 
 - **Adding a soundscape layer is adding an entry to `src/data/layers.ts`.** A
-  layer's `make` is either a generator in `audio/` or `fileSound('audio/x.mp3')`.
+  layer's `make` is either a generator in `audio/` (the drones) or
+  `fileSound('audio/field/x.mp3')` for a recording. Nature layers are Stu's own
+  field recordings, never synthesised; level new ones to −18 LUFS (MAINTENANCE.md).
 - Every sound is a `Sound` (`audio/sound.ts`): an `out`, `stop()`, and
   optionally `retune()` for the key.
 - The engine's signal flow is drawn at the top of `audio/engine.ts`. Keep that
