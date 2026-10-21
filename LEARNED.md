@@ -1,0 +1,24 @@
+# LEARNED.md — one line per concept, with where it lives
+
+- **AudioContext**: the one "sound engine" a web page gets; every sound is a node plugged into it. → `audio/engine.ts`
+- **Gain node**: a volume knob as a node. Fades are scheduled changes to its `gain`. → `audio/engine.ts` (`glide`)
+- **Bus**: one node many sounds plug into, so they can be turned up, faded or recorded together. → `bed` in `audio/engine.ts`
+- **Look-ahead scheduling**: a timer wakes 4× a second and books the next second of events on the audio clock, which is exact even when timers wobble. → `shell().tick` in `audio/sound.ts`
+- **Noise colours**: white (all frequencies equal), pink (softer highs, like rain), brown (much softer highs, like surf). → `audio/noise.ts`
+- **Filters**: low-pass keeps lows, high-pass keeps highs, band-pass keeps a band; Q is how narrow. Moving them over noise makes waves, wind and water. → `audio/nature.ts`
+- **Convolution reverb**: playing every sound through a recorded (or made-up) room's echo. → `airImpulse` in `audio/noise.ts`
+- **Detuned oscillators**: two copies a few cents apart beat slowly, which sounds alive (reeds, strings). → `audio/drones.ts`
+- **Equal-power crossfade**: fade in on a sine curve and out on a cosine, so the loudness doesn't dip at a loop's seam. → `crossfadeLoop` in `audio/loop.ts`
+- **AudioWorklet**: a tiny script that runs on the audio thread and sees every sample on time; used to record. → `public/recorder-worklet.js`
+- **Latency**: the delay from the speaker to your ears and from the mic to the app. The voice is pulled earlier by the sum so it lines up. → `roundTripLatency` in `audio/engine.ts`
+- **getUserMedia constraints**: asking the browser for a specific mic, and turning off echo cancellation, noise suppression and auto-gain. → `audio/mic.ts`
+- **dBFS**: decibels below the loudest a digital file can be (0). Voices like to peak between −18 and −6. → `ui/Meter.tsx`
+- **RMS**: the average loudness of a stretch of sound (root of the mean of the squares). Auto-balance compares voice and soundscape this way. → `audio/mixdown.ts`
+- **OfflineAudioContext**: the same audio graph rendered to a buffer as fast as possible, not in real time; this is how a mix is exported. → `renderMix` in `audio/mixdown.ts`
+- **WAV**: a 44-byte header and then the raw samples. → `audio/wav.ts`
+- **MP3 encoding**: LAME compiled to JavaScript, loaded only when needed (a dynamic `import()`). → `encodeMp3` in `audio/mixdown.ts`
+- **IndexedDB**: the browser's own database, big enough to keep audio files on the device. → `store/db.ts`
+- **Web Share API**: opens the phone's share sheet with a file, which reaches Drive, Files, AirDrop and so on. → `shareFile` in `audio/mixdown.ts`
+- **Transient activation**: a browser lets a page do some things (sharing, sound) only right after a tap. That's why Share may say "Share now" after a slow mix. → `ui/TakeRow.tsx`
+- **Pointer capture**: a pad keeps listening to the finger that pressed it, even if the finger slides a little off. → `ui/Pads.tsx`
+- **Spectrum on a log scale**: each octave gets equal width, which is how ears hear pitch. → `ui/Space.tsx`

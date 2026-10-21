@@ -1,0 +1,27 @@
+{
+  "name": "soundscape",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Being Sound — Soundscape: sing over a living soundscape and keep both tracks.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "@breezystack/lamejs": "^1.2.7",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "gh-pages": "^6.3.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  }
+}

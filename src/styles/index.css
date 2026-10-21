@@ -1,0 +1,119 @@
+/* ==========================================================================
+   index.css — the palette, the type, and the page itself.
+   --------------------------------------------------------------------------
+   The colours are beingsound.studio's own: the cool grey ground, the near-
+   black ink, the coral accent, and the secondary tints (slate, lavender,
+   clay, timber, sage, night) that the website declares and saves for
+   moments like these. Here each layer tile wears one when it's on.
+
+   The look borrows from Teenage Engineering and Kind of Studio: the app as a
+   small instrument. Panels are faceplates, sections are numbered (01, 02…),
+   labels are small mono capitals, a lit LED says "on", and coral is used for
+   one thing only: sound happening (recording, the sweet spot, the voice).
+
+   Every colour is defined for both day and night. The night theme follows
+   the device's setting.
+   ========================================================================== */
+
+:root {
+  --ground: rgb(224 224 224);
+  --panel: #ebebeb;
+  --raised: #f5f5f5;
+  --sunk: #d6d6d6;
+  --ink: rgb(24 24 24);
+  --on-ink: rgb(236 236 236);
+  --muted: #6b6b6b;
+  --hair: rgb(24 24 24 / 0.11);
+  --hair-strong: rgb(24 24 24 / 0.3);
+  --accent: rgb(228 107 108);
+  --on-accent: #fff;
+  --hot: #d2392b;
+  --space-bed: rgb(24 24 24 / 0.13);
+  --shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 1px 2px rgb(0 0 0 / 0.08);
+  --press: 0 1px 2px rgb(0 0 0 / 0.12) inset;
+
+  /* The website's secondary tints, for the tiles. */
+  --night: #16223c;
+  --slate: #6e8ca0;
+  --lav: #ac9cc8;
+  --clay: #c28a62;
+  --timber: #a97c4e;
+  --sage: #a6b598;
+  --riso-blue: #33468a;
+  --muted-tint: #8d9399;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ground: #141414;
+    --panel: #1d1d1d;
+    --raised: #262626;
+    --sunk: #0f0f0f;
+    --ink: rgb(226 226 226);
+    --on-ink: rgb(20 20 20);
+    --muted: #8e8e8e;
+    --hair: rgb(226 226 226 / 0.1);
+    --hair-strong: rgb(226 226 226 / 0.28);
+    --space-bed: rgb(226 226 226 / 0.15);
+    --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 1px 2px rgb(0 0 0 / 0.5);
+    --press: 0 1px 3px rgb(0 0 0 / 0.6) inset;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --ground: #141414;
+  --panel: #1d1d1d;
+  --raised: #262626;
+  --sunk: #0f0f0f;
+  --ink: rgb(226 226 226);
+  --on-ink: rgb(20 20 20);
+  --muted: #8e8e8e;
+  --hair: rgb(226 226 226 / 0.1);
+  --hair-strong: rgb(226 226 226 / 0.28);
+  --space-bed: rgb(226 226 226 / 0.15);
+  --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 1px 2px rgb(0 0 0 / 0.5);
+  --press: 0 1px 3px rgb(0 0 0 / 0.6) inset;
+  color-scheme: dark;
+}
+
+/* ---- Type: Collletttivo's faces, as on the website (SIL OFL; licences in
+   public/fonts). display = the wordmark, ui = everything you read,
+   label = the small mono capitals. ---------------------------------------- */
+@font-face { font-family: 'Ortica Linear'; src: url('/fonts/OrticaLinear-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Ronzino'; src: url('/fonts/Ronzino-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Ronzino'; src: url('/fonts/Ronzino-Oblique.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Ronzino'; src: url('/fonts/Ronzino-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Ronzino'; src: url('/fonts/Ronzino-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Necto Mono'; src: url('/fonts/NectoMono-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+:root {
+  --font-display: 'Ortica Linear', serif;
+  --font-ui: 'Ronzino', system-ui, sans-serif;
+  --font-label: 'Necto Mono', ui-monospace, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+button, select, input { font: inherit; color: inherit; }
+
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
