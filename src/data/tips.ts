@@ -70,7 +70,7 @@ export const TIPS: TipSection[] = [
       { title: 'Pick it under Input', body: 'Plug it in, then choose it from the Input list in the Voice panel. If it doesn\'t appear, unplug it and plug it in again; the list updates by itself.' },
       { title: 'Which input?', body: 'If your interface has two inputs, choose the one your mic is plugged into (Input 1 or Input 2). The meter shows when you\'ve found it.' },
       { title: 'Set the gain on the device', body: 'Turn the gain knob on the mic or interface while you sing your loudest phrase. Aim for the meter to peak in the coral zone, never in the red. The app\'s Trim is only for fine adjustment.' },
-      { title: 'Turn off direct monitoring echo', body: 'If your interface lets you hear yourself directly, leave the app\'s "Hear yourself" off, or you\'ll hear yourself twice.' },
+      { title: 'Turn off direct monitoring echo', body: 'If your interface lets you hear yourself directly, leave the app\'s Input monitoring off, or you\'ll hear yourself twice.' },
       { title: 'Phantom power', body: 'Condenser mics need 48V phantom power. Look for the 48V button on the interface. Dynamic mics (like an SM58) don\'t need it.' },
     ],
   },
@@ -94,7 +94,7 @@ export const TIPS: TipSection[] = [
       { title: 'Get out of the wind', body: 'Even a light breeze on the mic sounds like thunder. Stand behind a wall, a tree, a car or your own body, with the mic facing away from the wind.' },
       { title: 'A sock is a windscreen', body: 'A fuzzy sock or a bit of foam over the phone\'s mic end cuts wind noise a lot. It\'s what the "dead cat" fur covers on film sets do.' },
       { title: 'Let the place in, on purpose', body: 'Birds, water and wind are lovely as a soundscape. Turn the app\'s nature layers down and let the real ones be the bed.' },
-      { title: 'Tidy afterwards', body: 'The Tidy switch on a take cuts the low rumble wind and traffic leave behind.' },
+      { title: 'Low cut afterwards', body: 'The Low cut switch on a take (a high-pass filter at 80 Hz) removes the rumble wind and traffic leave behind.' },
     ],
   },
   {

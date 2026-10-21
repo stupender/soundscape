@@ -10,6 +10,7 @@ import { decodeTake, playTake, positionOf, stopTake, updateMix } from '../audio/
 import { download } from '../audio/wav.ts';
 import type { Take } from '../store/db.ts';
 import { readPref, writePref } from '../store/prefs.ts';
+import { dbText } from './format.ts';
 
 interface Props {
   take: Take;
@@ -130,6 +131,9 @@ export function TakeRow({ take, number, open, onOpen, onDelete }: Props) {
           <span className="take-name">{take.name}</span>
           <span className="take-meta">{when} · {clock(take.seconds)}</span>
         </button>
+        <button className={`take-toggle ${open ? 'take-toggle--open' : ''}`} onClick={onOpen} aria-expanded={open} aria-label={open ? 'Close the mixer' : 'Open the mixer'}>
+          <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
+        </button>
       </div>
       <div className="take-bar" onPointerDown={seek} role="slider" aria-label="Position" aria-valuemin={0} aria-valuemax={take.seconds} aria-valuenow={pos}>
         <div className="take-bar-fill" style={{ width: `${(pos / take.seconds) * 100}%` }} />
@@ -140,18 +144,21 @@ export function TakeRow({ take, number, open, onOpen, onDelete }: Props) {
           <label className="fader-row">
             <span className="label">Voice</span>
             <input type="range" min={-30} max={18} step={0.5} value={mix.voiceDb} onChange={(e) => change({ voiceDb: Number(e.target.value) })} className="slider slider--voice" />
-            <span className="value">{mix.voiceDb > 0 ? '+' : ''}{mix.voiceDb} dB</span>
+            <span className="value">{dbText(mix.voiceDb, 1)}</span>
           </label>
           <label className="fader-row">
             <span className="label">Soundscape</span>
             <input type="range" min={-30} max={18} step={0.5} value={mix.bedDb} onChange={(e) => change({ bedDb: Number(e.target.value) })} className="slider" />
-            <span className="value">{mix.bedDb > 0 ? '+' : ''}{mix.bedDb} dB</span>
+            <span className="value">{dbText(mix.bedDb, 1)}</span>
           </label>
           <div className="switches">
             <button className="btn btn--small" onClick={balance} disabled={!!busy}>Auto-balance</button>
-            <label className="switch" title="A low-cut at 80 Hz: removes rumble, handling noise and wind">
+            <label className="switch">
               <input type="checkbox" checked={mix.tidy} onChange={(e) => change({ tidy: e.target.checked })} />
-              <span>Tidy voice</span>
+              <span className="switch-text">
+                <span>Low cut · 80 Hz</span>
+                <span className="switch-hint">High-pass filter on the voice: removes rumble, wind and handling noise</span>
+              </span>
             </label>
           </div>
 

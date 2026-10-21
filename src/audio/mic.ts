@@ -4,7 +4,7 @@
 // By default every "phone call" process is switched OFF — echo cancellation,
 // noise suppression, automatic gain. Those are made for video calls; on a
 // singing voice they pump, warble and cut off quiet endings. They can be
-// turned back on (the "call cleanup" switch) if you're somewhere noisy.
+// turned back on (the "Voice processing" switch) if you're somewhere noisy.
 //
 // Audio interfaces often send two channels (input 1 and input 2). If yours
 // does, you can choose which one your mic is plugged into.

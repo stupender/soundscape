@@ -37,7 +37,7 @@ export interface Engine {
   bedOut: DynamicsCompressorNode;
   /** The live microphone, after the channel pick and trim. */
   voice: GainNode;
-  /** Hear yourself in the headphones (zero by default — see Voice.tsx). */
+  /** Input monitoring: your mic in the headphones (off by default — see Voice.tsx). */
   monitor: GainNode;
   bedAnalyser: AnalyserNode;
   voiceAnalyser: AnalyserNode;

@@ -36,7 +36,7 @@
 }
 .quiet { color: var(--muted); font-size: 13px; }
 .error { color: var(--hot); font-size: 13px; margin-top: 10px; }
-.value { font-family: var(--font-label); font-size: 11px; color: var(--muted); min-width: 52px; text-align: right; }
+.value { flex: none; width: 66px; font-family: var(--font-label); font-size: 11px; color: var(--muted); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .spacer { flex: 1; }
 
 /* THE CONTROL GRAMMAR — the same vocabulary as beingsound.studio and the
@@ -158,6 +158,9 @@ select option { background: var(--panel); color: var(--ink); }
 .slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--panel); border: 1px solid var(--ink); }
 .slider:hover::-webkit-slider-thumb { background: var(--ink); }
 .slider:hover::-moz-range-thumb { background: var(--ink); }
+.slider:focus, .slider:focus-visible { outline: none; }
+.slider:focus-visible::-webkit-slider-thumb { background: var(--ink); }
+.slider:focus-visible::-moz-range-thumb { background: var(--ink); }
 .slider--voice::-webkit-slider-thumb { background: var(--accent); border-color: var(--accent); }
 .slider--voice::-moz-range-thumb { background: var(--accent); border-color: var(--accent); }
 
@@ -167,7 +170,7 @@ select option { background: var(--panel); color: var(--ink); }
 .fader-row--inline .label { min-width: 0; }
 
 /* Trim with its Auto button beside it, and a line saying what Auto found. */
-.trim-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.trim-row { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
 .trim-row .fader-row--inline .label { min-width: 88px; }
 .btn--listening { color: var(--accent); border-color: var(--accent); min-width: 64px; }
 .level-note { min-height: 0; margin-top: 6px; }
@@ -175,8 +178,13 @@ select option { background: var(--panel); color: var(--ink); }
 .level-note--live { color: var(--accent); }
 
 /* A switch: a small ruled box with a square that slides; on = filled with ink. */
-.switches { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 12px; }
-.switch { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+.switches { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 14px; }
+.switches--stack { flex-direction: column; align-items: stretch; gap: 10px; }
+.switch { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; }
+.switch:has(.switch-hint) { align-items: flex-start; }
+.switch:has(.switch-hint) input { margin-top: 2px; flex: none; }
+.switch-text { display: flex; flex-direction: column; gap: 1px; }
+.switch-hint { font-size: 12px; color: var(--muted); line-height: 1.35; }
 .switch input {
   appearance: none;
   width: 28px; height: 16px;
@@ -275,7 +283,12 @@ select option { background: var(--panel); color: var(--ink); }
 .topbar-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .key-pick { display: inline-flex; align-items: center; gap: 6px; }
 .key-pick select { font-family: var(--font-label); font-size: 13px; }
-.session-pick { display: inline-flex; gap: 6px; align-items: center; }
+.session-pick, .session-custom { display: inline-flex; gap: 6px; align-items: center; }
+.session-pick select { font-family: var(--font-label); font-size: 13px; }
+/* A number field: a bare line, like the selects. */
+.num-field { width: 3.6em; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; background: transparent; padding: 5px 0; font-family: var(--font-label); font-size: 13px; text-align: center; -moz-appearance: textfield; }
+.num-field::-webkit-inner-spin-button, .num-field::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.num-field:focus-visible { outline: none; border-bottom-color: var(--accent); }
 
 /* ---- Panels: the faceplates ---------------------------------------------- */
 .panel {
@@ -398,7 +411,8 @@ select option { background: var(--panel); color: var(--ink); }
 .io-end { display: inline-flex; align-items: center; gap: 8px; justify-self: end; }
 .io-on { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-label); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
 
-.meter-wrap { margin: 4px 0 14px; }
+.meter-wrap { margin: 6px 0 4px; }
+.meter-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
 .meter { position: relative; height: 10px; border: 1px solid var(--hair-strong); overflow: hidden; }
 .meter-zone { position: absolute; top: 0; bottom: 0; background: rgb(228 107 108 / 0.16); }
 .meter-zone--hot { background: rgb(210 57 43 / 0.22); }
@@ -409,7 +423,7 @@ select option { background: var(--panel); color: var(--ink); }
 .meter-scale { position: relative; display: flex; justify-content: space-between; margin-top: 5px; font-family: var(--font-label); font-size: 9px; color: var(--muted); }
 .meter-scale span:nth-child(2) { position: absolute; left: 70%; transform: translateX(-50%); }
 .meter-scale span:nth-child(3) { position: absolute; left: 90%; transform: translateX(-50%); }
-.meter-readout { position: absolute; right: 0; top: 14px; }
+.meter-readout { text-transform: none; color: var(--ink); font-variant-numeric: tabular-nums; display: inline-block; min-width: 44px; text-align: right; }
 
 .space { margin: 16px 0 0; }
 .space-canvas { display: block; width: 100%; height: 64px; border: 1px solid var(--hair); }
@@ -485,6 +499,10 @@ select option { background: var(--panel); color: var(--ink); }
 }
 .take-play:hover, .take-play--on { background: var(--ink); color: var(--on-ink); }
 .take-title { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; background: none; border: 0; padding: 0; text-align: left; }
+/* The arrow that opens a take's mixer: points down closed, up open. */
+.take-toggle { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border: 0; background: transparent; color: var(--muted); transition: transform 0.2s, color 0.15s; }
+.take-toggle:hover { color: var(--ink); }
+.take-toggle--open { transform: rotate(180deg); color: var(--ink); }
 .take-title:hover .take-name { text-decoration: underline; text-underline-offset: 0.2em; }
 .take-num { font-family: var(--font-label); font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; min-width: 1.6em; }
 .take-name { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }

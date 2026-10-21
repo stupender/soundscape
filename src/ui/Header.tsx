@@ -1,7 +1,6 @@
 // THE TOP BAR — the wordmark, the key (Sa), the session timer, and Tips.
-import { useEffect, useState } from 'react';
 import { KEYS, type Key } from '../data/keys.ts';
-import { endSession, onSession, startSession, type SessionState } from '../audio/session.ts';
+import { SessionPicker } from './SessionPicker.tsx';
 import { ThemeSwitch } from './ThemeSwitch.tsx';
 
 interface Props {
@@ -13,14 +12,7 @@ interface Props {
   playing: boolean;
 }
 
-const LENGTHS = [5, 10, 20, 30];
-const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-
 export function Header({ keyNow, setKey, sa, openTips, playing }: Props) {
-  const [session, setSession] = useState<SessionState>({ running: false, total: 0, elapsed: 0 });
-  const [picking, setPicking] = useState(false);
-  useEffect(() => onSession(setSession), []);
-
   return (
     <header className="topbar">
       <div className="wordmark">
@@ -48,22 +40,7 @@ export function Header({ keyNow, setKey, sa, openTips, playing }: Props) {
           </select>
         </label>
 
-        {session.running ? (
-          <button className="chip chip--on" onClick={() => endSession(true)} title="End the session early">
-            <span className="led led--on" /> {clock(Math.max(session.total - session.elapsed, 0))} · end
-          </button>
-        ) : picking ? (
-          <span className="session-pick" role="group" aria-label="Session length">
-            {LENGTHS.map((m) => (
-              <button key={m} className="chip" onClick={() => { setPicking(false); startSession(m, sa); }}>{m}′</button>
-            ))}
-            <button className="text-btn" onClick={() => setPicking(false)}>×</button>
-          </span>
-        ) : (
-          <button className="chip" onClick={() => setPicking(true)} title="A bell to open, the soundscape beneath, three bells to close">
-            Session
-          </button>
-        )}
+        <SessionPicker sa={sa} />
 
         <button className="chip" onClick={openTips}>Tips</button>
         <ThemeSwitch />

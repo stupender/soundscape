@@ -35,7 +35,7 @@ export function Meter({ active }: { active: boolean }) {
         bar.current.dataset.zone = db > -3 ? 'hot' : db > -18 ? 'sweet' : 'low';
       }
       if (hold.current) hold.current.style.left = `${toPct(held)}%`;
-      if (readout.current) readout.current.textContent = held <= FLOOR ? '—' : `${Math.round(held)} dB`;
+      if (readout.current) readout.current.textContent = held <= FLOOR ? '—' : `${held < 0 ? '−' : ''}${Math.abs(Math.round(held))} dB`;
       raf = requestAnimationFrame(draw);
     };
     raf = requestAnimationFrame(draw);
@@ -44,6 +44,10 @@ export function Meter({ active }: { active: boolean }) {
 
   return (
     <div className="meter-wrap">
+      <div className="meter-head">
+        <span className="label">Input level</span>
+        <span className="label">Peak <span ref={readout} className="meter-readout">—</span></span>
+      </div>
       <div className="meter" role="img" aria-label="Input level">
         <div className="meter-zone" style={{ left: `${toPct(-18)}%`, width: `${toPct(-6) - toPct(-18)}%` }} />
         <div className="meter-zone meter-zone--hot" style={{ left: `${toPct(-3)}%`, right: 0 }} />
@@ -52,7 +56,6 @@ export function Meter({ active }: { active: boolean }) {
       </div>
       <div className="meter-scale">
         <span>−60</span><span>−18</span><span>−6</span><span>0</span>
-        <span ref={readout} className="meter-readout">—</span>
       </div>
     </div>
   );

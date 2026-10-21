@@ -17,6 +17,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { canPickOutput, getEngine, glide, setOutputDevice } from '../audio/engine.ts';
 import { strike } from '../audio/session.ts';
 import { measureTrim, TRIM_MAX, TRIM_MIN } from '../audio/autoLevel.ts';
+import { dbText } from './format.ts';
 import { KEYS, saHz } from '../data/keys.ts';
 import { closeMic, listDevices, openMic, setTrim, type MicInfo } from '../audio/mic.ts';
 import { readyPads, setPadInputLatency } from '../audio/pads.ts';
@@ -256,7 +257,7 @@ export function Voice({ keyName, onTake, onMic, openTips }: Props) {
             <label className="fader-row fader-row--inline">
               <span className="label">Trim</span>
               <input type="range" min={TRIM_MIN} max={TRIM_MAX} step={0.01} value={trim} onChange={(e) => { setLevelNote(''); changeTrim(Number(e.target.value)); }} className="slider" disabled={listening !== null} />
-              <span className="value">{trim >= 1 ? '+' : ''}{(20 * Math.log10(trim)).toFixed(0)} dB</span>
+              <span className="value">{dbText(20 * Math.log10(trim))}</span>
             </label>
             <button className={`btn btn--small ${listening !== null ? 'btn--listening' : ''}`} onClick={autoLevel} disabled={listening !== null || recording} title="Sing your loudest phrase for five seconds; the trim is set for you">
               {listening !== null ? <><span className="led led--on" />{listening}</> : 'Auto'}
@@ -265,14 +266,20 @@ export function Voice({ keyName, onTake, onMic, openTips }: Props) {
           <p className={`quiet level-note ${listening !== null ? 'level-note--live' : ''}`} aria-live="polite">
             {listening !== null ? 'Listening… sing your loudest phrase.' : levelNote}
           </p>
-          <div className="switches">
+          <div className="switches switches--stack">
             <label className="switch">
               <input type="checkbox" checked={hearSelf} onChange={(e) => changeHearSelf(e.target.checked)} />
-              <span>Hear yourself</span>
+              <span className="switch-text">
+                <span>Input monitoring</span>
+                <span className="switch-hint">Hear your mic in your headphones (leave off if your interface already does)</span>
+              </span>
             </label>
             <label className="switch">
               <input type="checkbox" checked={cleanup} onChange={(e) => choose({ cleanup: e.target.checked })} />
-              <span>Call cleanup</span>
+              <span className="switch-text">
+                <span>Voice processing</span>
+                <span className="switch-hint">Echo cancellation, noise suppression and auto gain, as on calls. Off for singing.</span>
+              </span>
             </label>
           </div>
           <Space active={!!mic} />

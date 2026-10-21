@@ -119,4 +119,5 @@ button, select, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
 button:disabled { cursor: default; }
 
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Focus, as on the website: a thin ink ring, set a little apart. */
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
