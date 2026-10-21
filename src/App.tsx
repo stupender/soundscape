@@ -2,10 +2,11 @@
 //
 //   01 Soundscape — what plays under you (left column on a wide screen)
 //   02 Voice      — the mic and the record button (right column)
-//   03 Pads       — Terry's number pad (left, under the soundscape)
-//   04 Takes      — what you've recorded: mix, export, share (right)
+//   03 Takes      — what you've recorded: mix, export, share (right)
+//   04 Pads       — Terry's number pad (left, under the soundscape;
+//                   hidden for now, see SHOW_PADS)
 //
-// On a phone they stack in that order, one under another.
+// On a phone they stack: soundscape, voice, takes (then pads).
 //
 // Shared state here: the key, every layer's on/off and level, your uploads,
 // the soundscape level, whether the mic is on, and the list of takes.
@@ -21,6 +22,10 @@ import { Soundscape, type LayerState } from './ui/Soundscape.tsx';
 import { Takes } from './ui/Takes.tsx';
 import { Tips, guessSection } from './ui/Tips.tsx';
 import { Voice } from './ui/Voice.tsx';
+
+// Terry's number pads are built (ui/Pads.tsx, audio/pads.ts) but set aside
+// for now to keep V1 simple. Set this to true to bring them back.
+const SHOW_PADS = false;
 
 export default function App() {
   const [key, setKeyState] = useState<Key>(() => KEYS.find((k) => k.name === readPref('key', 'D')) ?? KEYS[2]);
@@ -71,7 +76,7 @@ export default function App() {
             master={master}
             setMaster={setMaster}
           />
-          <Pads micOn={micOn} />
+          {SHOW_PADS && <Pads micOn={micOn} />}
         </div>
         <div className="col">
           <Voice keyName={key.name} onTake={addTake} onMic={setMicOn} openTips={(s) => setTips(s)} />

@@ -22,8 +22,8 @@ device; nothing is uploaded.
 | **Sa** | One key for the whole room. The shruti box, the tanpura, the bell and the *Soundscape in 12 Keys* all follow it. |
 | **Session** | A bell to open, the soundscape rising beneath it, three bells to close (from Becoming's session timer). 5, 10, 20 or 30 minutes. |
 | **02 Voice** | Any mic, and on a two-input interface, Input 1 or 2. A level meter with a sweet spot, a trim, "hear yourself", and the browser's call processing switched **off** by default (it harms singing). The **space** picture shows where the soundscape sits and where your voice sits, so you can leave room for it. Record with the button or the space bar; the app asks about headphones first. |
-| **03 Pads** | After Uncle Terry's Max/MSP patch: ten pads laid out like a number pad. **Hold** an empty pad (or its number key) to record; **press** it again to hear it back. Shift + number erases. Pads play into the soundscape track. |
-| **04 Takes** | Play back. Voice and Soundscape faders. **Auto-balance** (sets the voice to a healthy level and the soundscape a step under it). **Tidy voice** (an 80 Hz low-cut). **Export** the mix as MP3 or WAV, **Share…**, or download the two tracks separately. |
+| **Pads** *(built, hidden for now)* | After Uncle Terry's Max/MSP patch: ten pads laid out like a number pad. **Hold** an empty pad (or its number key) to record; **press** it again to hear it back. Shift + number erases. Pads play into the soundscape track. Turn on with `SHOW_PADS` in `src/App.tsx`. |
+| **03 Takes** | Play back. Voice and Soundscape faders. **Auto-balance** (sets the voice to a healthy level and the soundscape a step under it). **Tidy voice** (an 80 Hz low-cut). **Export** the mix as MP3 or WAV, **Share…**, or download the two tracks separately. |
 | **Tips** | Best practices for a phone, a laptop, an iPad, a USB mic or interface, the room, outdoors, and headphones. |
 
 ## Run it

@@ -1,4 +1,4 @@
-// 03 PADS — Uncle Terry's number pad.
+// 04 PADS — Uncle Terry's number pad.
 //
 // Hold an empty pad (or its number key) to record; let go to keep it.
 // Press a full pad to hear it back. Shift + number, or Erase then a tap, to
@@ -52,7 +52,7 @@ export function Pads({ micOn }: { micOn: boolean }) {
   return (
     <section className="panel" aria-labelledby="pads-h">
       <header className="panel-head">
-        <span className="panel-num">03</span>
+        <span className="panel-num">04</span>
         <h2 id="pads-h">Pads</h2>
         <span className="panel-credit">after Terry's patch</span>
         <button className={`text-btn ${erasing ? 'text-btn--on' : ''}`} onClick={() => setErasing(!erasing)} disabled={!anyFull && !erasing} aria-pressed={erasing}>

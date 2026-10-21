@@ -10,15 +10,15 @@
   padding: max(16px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
 }
 
-/* On a phone: one column, in the order soundscape → voice → pads → takes.
+/* On a phone: one column, in the order soundscape → voice → takes → pads.
    The two .col wrappers dissolve (display: contents) so `order` can reach
    the panels inside them. */
 .grid { display: flex; flex-direction: column; gap: 14px; }
 .col { display: contents; }
 .grid [aria-labelledby='soundscape-h'] { order: 1; }
 .grid [aria-labelledby='voice-h'] { order: 2; }
-.grid [aria-labelledby='pads-h'] { order: 3; }
-.grid [aria-labelledby='takes-h'] { order: 4; }
+.grid [aria-labelledby='takes-h'] { order: 3; }
+.grid [aria-labelledby='pads-h'] { order: 4; }
 
 @media (min-width: 900px) {
   .app { padding: 28px 28px 40px; }

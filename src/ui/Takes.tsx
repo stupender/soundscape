@@ -1,4 +1,4 @@
-// 04 TAKES — every recording, newest first. Open one to mix and export it.
+// 03 TAKES — every recording, newest first. Open one to mix and export it.
 import { stopTake } from '../audio/takePlayer.ts';
 import { deleteTake, type Take } from '../store/db.ts';
 import { TakeRow } from './TakeRow.tsx';
@@ -20,7 +20,7 @@ export function Takes({ takes, openId, setOpenId, onDeleted }: Props) {
   return (
     <section className="panel" aria-labelledby="takes-h">
       <header className="panel-head">
-        <span className="panel-num">04</span>
+        <span className="panel-num">03</span>
         <h2 id="takes-h">Takes</h2>
         <span className="panel-credit">{takes.length ? `${takes.length} on this device` : ''}</span>
       </header>
