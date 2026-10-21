@@ -45,6 +45,8 @@ export interface Engine {
 
 let engine: Engine | null = null;
 let workletReady: Promise<void> | null = null;
+/** The output you chose ('' = the system's), applied as soon as the engine exists. */
+let chosenOutput = '';
 
 /** The one engine, made on first use. Call it from a click or key press. */
 export function getEngine(): Engine {
@@ -90,6 +92,7 @@ export function getEngine(): Engine {
   voice.connect(voiceAnalyser);
 
   engine = { ctx, bed, air, fade, level, duck, bedOut, voice, monitor, bedAnalyser, voiceAnalyser };
+  if (chosenOutput) void setOutputDevice(chosenOutput).catch(() => {});
   return engine;
 }
 
@@ -125,9 +128,14 @@ export function canPickOutput(): boolean {
   return typeof (AudioContext.prototype as unknown as { setSinkId?: unknown }).setSinkId === 'function';
 }
 
-/** Send everything to a chosen output device ('' = the system default). */
+/**
+ * Send everything to a chosen output device ('' = the system default).
+ * If the engine isn't made yet, the choice waits and is applied when it is.
+ */
 export async function setOutputDevice(deviceId: string): Promise<void> {
-  const ctx = getEngine().ctx as AudioContext & { setSinkId?: (id: string) => Promise<void> };
+  chosenOutput = deviceId;
+  if (!engine) return;
+  const ctx = engine.ctx as AudioContext & { setSinkId?: (id: string) => Promise<void> };
   if (ctx.setSinkId) await ctx.setSinkId(deviceId);
 }
 

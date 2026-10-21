@@ -29,8 +29,6 @@
   --on-accent: #fff;
   --hot: #d2392b;
   --space-bed: rgb(24 24 24 / 0.13);
-  --shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 1px 2px rgb(0 0 0 / 0.08);
-  --press: 0 1px 2px rgb(0 0 0 / 0.12) inset;
 
   /* The website's secondary tints, for the tiles. */
   --night: #16223c;
@@ -59,8 +57,6 @@
     --hair: rgb(226 226 226 / 0.1);
     --hair-strong: rgb(226 226 226 / 0.28);
     --space-bed: rgb(226 226 226 / 0.15);
-    --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 1px 2px rgb(0 0 0 / 0.5);
-    --press: 0 1px 3px rgb(0 0 0 / 0.6) inset;
     --mark-ink: #6a7fd0;
     color-scheme: dark;
   }
@@ -76,8 +72,6 @@
   --hair: rgb(226 226 226 / 0.1);
   --hair-strong: rgb(226 226 226 / 0.28);
   --space-bed: rgb(226 226 226 / 0.15);
-  --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 1px 2px rgb(0 0 0 / 0.5);
-  --press: 0 1px 3px rgb(0 0 0 / 0.6) inset;
   --mark-ink: #6a7fd0;
   color-scheme: dark;
 }
@@ -97,10 +91,10 @@
   --font-ui: 'Ronzino', system-ui, sans-serif;
   --font-label: 'Necto Mono', ui-monospace, monospace;
 
-  /* Corners, as on the website: printed, nearly square. Round is kept for
+  /* Corners: square, as on the website and the Raga Practice Library. Round is kept for
      things that really are dots (LEDs, the record button, slider caps). */
-  --r: 3px;
-  --r-sm: 2px;
+  --r: 0;
+  --r-sm: 0;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

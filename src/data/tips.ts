@@ -26,7 +26,7 @@ export const TIPS: TipSection[] = [
       { title: 'Wired is best', body: 'Wired headphones have no delay, so you sing in time with what you hear. Any pair will do, even the ones that came with a phone.' },
       { title: 'Bluetooth on a phone takes over the mic', body: 'With AirPods or other Bluetooth headphones, an iPhone often switches to the headphones\' own mic, which sounds thin. For the best voice, use wired headphones (with an adapter if needed) so the phone\'s own mic stays on.' },
       { title: 'Keep them quiet', body: 'Closed headphones (over-ear, sealed) leak less than open ones. Keep the level comfortable: if you can hear the soundscape from a metre away, the mic can too.' },
-      { title: 'Choose a different mic', body: 'Headphones with a mic built in don\'t have to be the mic. Under "Your voice", choose the phone\'s or laptop\'s own mic, or your USB mic, and leave the headphones for listening.' },
+      { title: 'Choose a different mic', body: 'Headphones with a mic built in don\'t have to be the mic. Under Input, choose the phone\'s or laptop\'s own mic, or your USB mic, and leave the headphones for listening (Output).' },
     ],
   },
   {
@@ -67,7 +67,7 @@ export const TIPS: TipSection[] = [
     name: 'USB mic & interface',
     intro: 'A real microphone, through USB or an audio interface, is the biggest step up in sound.',
     tips: [
-      { title: 'Pick it under "Your voice"', body: 'Plug it in before opening the mic, then choose it from the list. If it doesn\'t appear, unplug it, plug it in again and press "Look again".' },
+      { title: 'Pick it under Input', body: 'Plug it in, then choose it from the Input list in the Voice panel. If it doesn\'t appear, unplug it and plug it in again; the list updates by itself.' },
       { title: 'Which input?', body: 'If your interface has two inputs, choose the one your mic is plugged into (Input 1 or Input 2). The meter shows when you\'ve found it.' },
       { title: 'Set the gain on the device', body: 'Turn the gain knob on the mic or interface while you sing your loudest phrase. Aim for the meter to peak in the coral zone, never in the red. The app\'s Trim is only for fine adjustment.' },
       { title: 'Turn off direct monitoring echo', body: 'If your interface lets you hear yourself directly, leave the app\'s "Hear yourself" off, or you\'ll hear yourself twice.' },

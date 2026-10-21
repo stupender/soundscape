@@ -54,8 +54,13 @@ public/       recorder-worklet.js, fonts, the 12-keys audio excerpts, images.
   remembers the choice; `index.html` applies it before the first paint.
 - An instrument, after Teenage Engineering and Kind of Studio: numbered
   panels, mono capitals for labels, LEDs for "on".
-- Corners as on the website: 2–3 px (`--r`, `--r-sm`). Round only for real
-  dots (LEDs, the record button, slider caps, play buttons).
+- Controls follow the Raga Practice Library's grammar (`.blk`, `.blk-line`,
+  `Row` there): square corners, flat ink, no shadows or bevels; hover
+  inverts; "on" = filled with ink. Buttons are spaced caps; selects are bare
+  lines; lists are ruled rows; play is a ringed circle that fills with ink.
+  Round only for real dots (LEDs, the record button, slider caps, play).
+- The one glow allowed is light: a lit LED glows. Never add drop shadows.
+- Voice opens with two ruled rows, Input and Output, always visible.
 - The studio mark is the website's: the riso-blue ink disc with two orbs,
   orbiting while the soundscape sounds (`Header.tsx`, `.mark` in app.css).
 - Layer tiles are the Raga Practice Library's cards: number and one fact

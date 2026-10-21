@@ -119,8 +119,12 @@ export function TakeRow({ take, number, open, onOpen, onDelete }: Props) {
     <li className={`take ${open ? 'take--open' : ''}`}>
       <div className="take-head">
         <span className="take-num">{String(number).padStart(2, '0')}</span>
-        <button className="take-play" onClick={() => (playing ? stop() : play())} aria-label={playing ? 'Stop' : 'Play'}>
-          {playing ? <span className="icon-stop" /> : <span className="icon-play" />}
+        <button className={`take-play ${playing ? 'take-play--on' : ''}`} onClick={() => (playing ? stop() : play())} aria-label={playing ? 'Pause' : 'Play'}>
+          {playing ? (
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 1.5 L3.5 10.5 M8.5 1.5 L8.5 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+          ) : (
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5 L10.5 6 L3 10.5 Z" fill="currentColor" /></svg>
+          )}
         </button>
         <button className="take-title" onClick={onOpen} aria-expanded={open}>
           <span className="take-name">{take.name}</span>
