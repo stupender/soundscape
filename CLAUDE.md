@@ -49,7 +49,9 @@ public/       recorder-worklet.js, fonts, the 12-keys audio excerpts, images.
 
 - The website's palette (`--ground`, `--ink`, `--accent` coral, plus the
   secondary tints) and its Collletttivo type. Tokens are in
-  `src/styles/index.css`, defined for day and night.
+  `src/styles/index.css`, defined for day and night. The app follows the
+  device until the day/night switch (`ui/ThemeSwitch.tsx`) is pressed, then
+  remembers the choice; `index.html` applies it before the first paint.
 - An instrument, after Teenage Engineering and Kind of Studio: numbered
   panels, mono capitals for labels, LEDs for "on".
 - Corners as on the website: 2–3 px (`--r`, `--r-sm`). Round only for real

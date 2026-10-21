@@ -102,6 +102,7 @@
 }
 .chip:hover { border-color: var(--ink); }
 .chip--on { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.chip--icon { padding: 7px 9px; }
 
 select {
   appearance: none;

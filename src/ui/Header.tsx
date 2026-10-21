@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { KEYS, type Key } from '../data/keys.ts';
 import { endSession, onSession, startSession, type SessionState } from '../audio/session.ts';
+import { ThemeSwitch } from './ThemeSwitch.tsx';
 
 interface Props {
   keyNow: Key;
@@ -65,6 +66,7 @@ export function Header({ keyNow, setKey, sa, openTips, playing }: Props) {
         )}
 
         <button className="chip" onClick={openTips}>Tips</button>
+        <ThemeSwitch />
       </div>
     </header>
   );
