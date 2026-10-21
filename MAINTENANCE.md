@@ -56,6 +56,7 @@ Two halves, both needed:
    minutes after the DNS record resolves).
 
 Once the domain is set, `stupender.github.io/soundscape/` redirects to it.
+Set up and live since 2026-10-21 (the CNAME record is in Squarespace Domains).
 
 ## The 12-keys audio
 

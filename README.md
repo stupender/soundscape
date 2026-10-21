@@ -13,6 +13,7 @@ the soundscape are recorded as **two separate tracks**, so afterwards you can
 balance them, tidy the voice, and export a mix as MP3 or WAV, or share it
 straight to Google Drive, Files, AirDrop or Messages.
 
+**Live at [soundscapes.beingsound.studio](https://soundscapes.beingsound.studio).**
 It runs in the browser on a phone, an iPad or a laptop. Takes stay on the
 device; nothing is uploaded.
 
