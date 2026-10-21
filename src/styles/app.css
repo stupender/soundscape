@@ -56,7 +56,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 18px;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   border: 1px solid var(--hair-strong);
   background: var(--raised);
   box-shadow: var(--shadow);
@@ -91,7 +91,7 @@
   align-items: center;
   gap: 8px;
   padding: 7px 13px;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   border: 1px solid var(--hair-strong);
   background: transparent;
   font-family: var(--font-label);
@@ -107,7 +107,7 @@ select {
   appearance: none;
   background: var(--sunk) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23888' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 10px center;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   padding: 8px 28px 8px 10px;
   font-size: 14px;
   max-width: 100%;
@@ -145,7 +145,7 @@ select {
 .switch input {
   appearance: none;
   width: 30px; height: 18px;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   background: var(--sunk);
   box-shadow: var(--press);
   position: relative;
@@ -155,7 +155,7 @@ select {
 .switch input::after {
   content: '';
   position: absolute; top: 2px; left: 2px;
-  width: 14px; height: 14px; border-radius: 50%;
+  width: 14px; height: 14px; border-radius: 1px;
   background: var(--raised);
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
   transition: transform 0.15s;
@@ -175,7 +175,53 @@ select {
   padding: 4px 2px 18px;
 }
 .wordmark { display: flex; align-items: center; gap: 10px; }
-.mark { width: 40px; height: 40px; fill: none; stroke: var(--accent); stroke-width: 2.2; }
+/* THE STUDIO MARK — the website's own: a riso-blue ink disc, speckled and
+   slowly drifting (an SVG noise mask, from beingsound.studio's styles.css),
+   with two orbs on faint rings. Here the orbs orbit while the soundscape is
+   sounding, and rest wherever they got to when it falls quiet. */
+.mark {
+  --ink-mask:       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='3'%3E%3Canimate attributeName='baseFrequency' values='0.04;0.046;0.04' dur='23s' calcMode='spline' keyTimes='0;.5;1' keySplines='.45 0 .55 1;.45 0 .55 1' repeatCount='indefinite'/%3E%3C/feTurbulence%3E%3CfeOffset%3E%3Canimate attributeName='dx' values='0;16;0' dur='17s' calcMode='spline' keyTimes='0;.5;1' keySplines='.45 0 .55 1;.45 0 .55 1' repeatCount='indefinite'/%3E%3Canimate attributeName='dy' values='0;-11;0' dur='13s' calcMode='spline' keyTimes='0;.5;1' keySplines='.45 0 .55 1;.45 0 .55 1' repeatCount='indefinite'/%3E%3C/feOffset%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -14 11'/%3E%3C/filter%3E%3Ccircle cx='60' cy='60' r='58' filter='url(%23m)'/%3E%3C/svg%3E");
+  --ink-mask-still: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -14 11'/%3E%3C/filter%3E%3Ccircle cx='60' cy='60' r='58' filter='url(%23m)'/%3E%3C/svg%3E");
+  position: relative;
+  flex: none;
+  width: 46px;
+  aspect-ratio: 1;
+}
+.mark-ink {
+  position: absolute;
+  inset: 21.25%;
+  border-radius: 50%;
+  background: var(--mark-ink);
+  opacity: 0.95;
+  -webkit-mask-image: var(--ink-mask);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: var(--ink-mask);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  transition: transform 2.4s cubic-bezier(.2, .7, .2, 1), opacity 2.4s ease;
+}
+@media (hover: hover) {
+  .mark:hover .mark-ink { transform: scale(1.08) rotate(-24deg); opacity: 1; transition-duration: 1.2s; }
+}
+.mark-orbits { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.mark-orbits .ring { fill: none; stroke: var(--ink); stroke-width: 0.8; opacity: 0.22; transition: opacity 0.6s ease; }
+.mark-orbits .orb circle { fill: var(--mark-ink); }
+.mark-orbits .orb {
+  transform-box: view-box;
+  transform-origin: 20px 20px;
+  animation: mark-orbit 7s linear infinite paused;
+  animation-delay: -1.4s;
+}
+.mark-orbits .orb2 { animation-duration: 12s; animation-delay: -7.6s; }
+.mark--playing .orb { animation-play-state: running; }
+.mark--playing .ring { opacity: 0.42; }
+@keyframes mark-orbit { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .mark { --ink-mask: var(--ink-mask-still); }
+}
 .wordmark h1 {
   font-family: var(--font-display);
   font-weight: 400;
@@ -201,100 +247,103 @@ select {
 .panel {
   background: var(--panel);
   border: 1px solid var(--hair);
-  border-radius: 20px;
+  border-radius: var(--r);
   padding: 16px;
-  box-shadow: var(--shadow);
   min-width: 0;
 }
 @media (min-width: 900px) { .panel { padding: 20px 22px 22px; } }
 
-.panel-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-bottom: 14px; min-height: 28px; }
-.panel-head h2 { font-weight: 500; font-size: 19px; letter-spacing: -0.005em; }
-.panel-head .led { margin-right: auto; }
-.panel-num {
-  font-family: var(--font-label);
-  font-size: 11px;
-  padding: 3px 6px;
-  border: 1px solid var(--hair-strong);
-  border-radius: 6px;
-  color: var(--muted);
+/* The panel head, after the Raga Practice Library's cards: the number and
+   the name in bold capitals, over a ruled line in ink. */
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink);
 }
+.panel-head h2 { font-weight: 700; font-size: 16px; letter-spacing: 0.02em; text-transform: uppercase; }
+.panel-head .led { margin-right: auto; align-self: center; }
+.panel-num { font-family: var(--font-label); font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; }
 .panel-credit { white-space: nowrap; font-family: var(--font-label); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-right: auto; }
 
 /* ---- 01 Soundscape: presets and tiles ------------------------------------ */
 .presets { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin: 0 -2px 12px; scrollbar-width: none; }
 .presets::-webkit-scrollbar { display: none; }
 
-.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 10px; }
-@media (min-width: 600px) { .tiles { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); } }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 520px) { .tiles { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
 
+/* THE CARD (from RagaCard.tsx in the Raga Practice Library): flat, square,
+   one anatomy every time. Off, it is printed ink on the light stock; on, it
+   takes its colour and the type turns light. */
 .tile {
   --tint: var(--ink);
+  --tile-ink: var(--ink);
+  --tile-rule: var(--hair-strong);
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
+  aspect-ratio: 4 / 5;
+  padding: 12px 12px 0;
+  border-radius: var(--r-sm);
   background: var(--raised);
-  box-shadow: var(--shadow);
   border: 1px solid var(--hair);
+  color: var(--tile-ink);
   overflow: hidden;
   min-width: 0;
-}
-.tile-face {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  padding: 12px 12px 6px;
-  border: 0;
-  background: transparent;
-  text-align: left;
-  min-height: 112px;
-  color: var(--ink);
   transition: background 0.3s, color 0.3s;
 }
-.tile-icon { display: block; margin-bottom: auto; padding-bottom: 8px; opacity: 0.8; }
-.tile-name { font-weight: 500; font-size: 14px; position: relative; }
-.tile-note { font-family: var(--font-label); font-size: 10px; letter-spacing: 0.03em; color: var(--muted); position: relative; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
-.tile-led { position: absolute; top: 12px; right: 12px; }
-.tile-slider { margin: 0 10px 6px; width: auto; opacity: 0.55; transition: opacity 0.2s; }
+/* The whole card is the on/off button, lying underneath everything. */
+.tile-face { position: absolute; inset: 0; border: 0; background: transparent; padding: 0; z-index: 0; }
+.tile > :not(.tile-face) { position: relative; z-index: 1; pointer-events: none; }
+.tile > .tile-slider { pointer-events: auto; }
+.tile:has(.tile-face:hover) .tile-name { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 2px; }
 
-/* On: the tile takes its colour, the type turns light, the icon breathes. */
-.tile--on { background: var(--tint); border-color: transparent; }
-.tile--on .tile-face, .tile--on .tile-note { color: #fff; }
-.tile--on .tile-note { opacity: 0.8; }
+.tile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--tile-rule);
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.tile-now { display: inline-flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.04em; font-size: 10px; }
+.tile-now .led { width: 6px; height: 6px; }
+.tile--on .tile-now .led { background: #fff; box-shadow: 0 0 0 3px rgb(255 255 255 / 0.2), 0 0 8px rgb(255 255 255 / 0.7); }
+.tile-name { margin-top: 10px; font-weight: 700; font-size: 14px; line-height: 1.12; letter-spacing: 0.01em; text-transform: uppercase; }
+.tile-note { margin-top: 3px; font-size: 12.5px; line-height: 1.3; opacity: 0.72; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile-slider { margin-top: 4px; opacity: 0.5; transition: opacity 0.2s; }
+
+/* The picture takes whatever height is left and is cut off by the card's
+   bottom edge, so it seems to rise from below. */
+.tile-picture { flex: 1; min-height: 40px; margin-top: 4px; position: relative; }
+.tile-icon { position: absolute; left: 50%; top: 4px; transform: translateX(-50%); opacity: 0.55; line-height: 0; }
+.tile-img {
+  position: absolute; left: 0; right: 0; top: 4px;
+  width: 100%; aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 1px;
+  filter: grayscale(1);
+  opacity: 0.45;
+  transition: opacity 0.4s, filter 0.4s;
+}
+
+.tile--on { background: var(--tint); border-color: transparent; --tile-ink: #fff; --tile-rule: rgb(255 255 255 / 0.55); }
 .tile--on .tile-slider { opacity: 1; }
 .tile--on .tile-slider::-webkit-slider-runnable-track { background: rgb(255 255 255 / 0.45); }
 .tile--on .tile-slider::-moz-range-track { background: rgb(255 255 255 / 0.45); }
 .tile--on .tile-slider::-webkit-slider-thumb { background: #fff; border-color: #fff; }
 .tile--on .tile-slider::-moz-range-thumb { background: #fff; border-color: #fff; }
-.tile--on .tile-icon { animation: breathe 5s ease-in-out infinite; opacity: 1; }
-@keyframes breathe { 50% { transform: scale(1.06); opacity: 0.75; } }
+.tile--on .tile-icon { opacity: 0.9; animation: breathe 5s ease-in-out infinite; }
+.tile--on .tile-img { filter: none; opacity: 1; }
+@keyframes breathe { 50% { transform: translateX(-50%) translateY(-3px); opacity: 0.7; } }
 
-/* A tile with a photograph: grey and faint when off, in colour when on. */
-.tile-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: grayscale(1);
-  opacity: 0.22;
-  transition: opacity 0.4s, filter 0.4s;
-}
-.tile--on .tile-img { filter: none; opacity: 0.75; }
-.tile:has(.tile-img) .tile-icon, .tile:has(.tile-img) .tile-name { position: relative; }
-
-.tile--add {
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 12px;
-  min-height: 140px;
-  background: transparent;
-  border: 1px dashed var(--hair-strong);
-  box-shadow: none;
-  text-align: left;
-  gap: 2px;
-}
+.tile--add { background: transparent; border: 1px dashed var(--hair-strong); }
 .tile--add:hover { border-color: var(--ink); }
 
 /* ---- 02 Voice ------------------------------------------------------------ */
@@ -306,10 +355,10 @@ select {
 .field select { width: 100%; }
 
 .meter-wrap { margin: 4px 0 14px; }
-.meter { position: relative; height: 12px; border-radius: 6px; background: var(--sunk); box-shadow: var(--press); overflow: hidden; }
+.meter { position: relative; height: 12px; border-radius: var(--r-sm); background: var(--sunk); box-shadow: var(--press); overflow: hidden; }
 .meter-zone { position: absolute; top: 0; bottom: 0; background: rgb(228 107 108 / 0.2); }
 .meter-zone--hot { background: rgb(210 57 43 / 0.25); }
-.meter-bar { position: absolute; left: 0; top: 3px; bottom: 3px; width: 0; border-radius: 3px; background: var(--ink); opacity: 0.75; }
+.meter-bar { position: absolute; left: 0; top: 3px; bottom: 3px; width: 0; border-radius: 1px; background: var(--ink); opacity: 0.75; }
 .meter-bar[data-zone='sweet'] { background: var(--accent); opacity: 1; }
 .meter-bar[data-zone='hot'] { background: var(--hot); opacity: 1; }
 .meter-hold { position: absolute; top: 1px; bottom: 1px; width: 2px; background: var(--ink); left: 0; }
@@ -319,7 +368,7 @@ select {
 .meter-readout { position: absolute; right: 0; top: 14px; }
 
 .space { margin: 16px 0 0; }
-.space-canvas { display: block; width: 100%; height: 64px; border-radius: 10px; background: var(--sunk); box-shadow: var(--press); }
+.space-canvas { display: block; width: 100%; height: 64px; border-radius: var(--r-sm); background: var(--sunk); box-shadow: var(--press); }
 .space-caption { display: flex; gap: 14px; margin-top: 6px; font-family: var(--font-label); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
 .space-axis { margin-left: auto; }
 .swatch { display: inline-block; width: 10px; height: 3px; vertical-align: middle; margin-right: 4px; }
@@ -339,7 +388,7 @@ select {
 .rec:active:not(:disabled) { box-shadow: var(--press); }
 .rec:disabled { opacity: 0.5; }
 .rec-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); transition: border-radius 0.2s, width 0.2s, height 0.2s; }
-.rec--on .rec-dot { width: 24px; height: 24px; border-radius: 5px; animation: pulse 1.6s ease-in-out infinite; }
+.rec--on .rec-dot { width: 24px; height: 24px; border-radius: 2px; animation: pulse 1.6s ease-in-out infinite; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 8px rgb(228 107 108 / 0.18); } }
 .rec-text { display: flex; flex-direction: column; gap: 2px; }
 .rec-clock { font-family: var(--font-label); font-size: 26px; line-height: 1; letter-spacing: 0.02em; }
@@ -349,7 +398,7 @@ select {
 .pad {
   position: relative;
   aspect-ratio: 1;
-  border-radius: 18px;
+  border-radius: var(--r);
   border: 1px solid var(--hair);
   background: var(--raised);
   box-shadow: var(--shadow), 0 3px 0 var(--sunk);
@@ -386,7 +435,8 @@ select {
 .icon-play { width: 0; height: 0; border-left: 10px solid var(--ink); border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 3px; }
 .icon-stop { width: 10px; height: 10px; background: var(--accent); border-radius: 2px; }
 .take-title { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; background: none; border: 0; padding: 0; text-align: left; }
-.take-name { font-weight: 500; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+.take-num { font-family: var(--font-label); font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; min-width: 1.6em; }
+.take-name { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 .take-meta { font-family: var(--font-label); font-size: 10px; color: var(--muted); letter-spacing: 0.03em; }
 .take-bar { position: relative; height: 18px; margin-top: 8px; cursor: pointer; touch-action: none; }
 .take-bar::before { content: ''; position: absolute; left: 0; right: 0; top: 8px; height: 2px; background: var(--hair-strong); border-radius: 2px; }
@@ -395,8 +445,8 @@ select {
 .take-body .fader-row .label { min-width: 92px; }
 .export-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 16px; }
 .export-row--quiet { margin-top: 10px; gap: 4px 8px; }
-.seg { display: inline-flex; padding: 2px; border-radius: 999px; background: var(--sunk); box-shadow: var(--press); }
-.seg-btn { border: 0; background: transparent; padding: 5px 11px; border-radius: 999px; font-family: var(--font-label); font-size: 11px; color: var(--muted); }
+.seg { display: inline-flex; padding: 2px; border-radius: var(--r-sm); background: var(--sunk); box-shadow: var(--press); }
+.seg-btn { border: 0; background: transparent; padding: 5px 11px; border-radius: 1px; font-family: var(--font-label); font-size: 11px; color: var(--muted); }
 .seg-btn--on { background: var(--raised); color: var(--ink); box-shadow: var(--shadow); }
 
 /* ---- Footer -------------------------------------------------------------- */
@@ -405,7 +455,7 @@ select {
 
 /* ---- Dialogs and the tips drawer ----------------------------------------- */
 .scrim { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 16px; background: rgb(0 0 0 / 0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.dialog { width: min(440px, 100%); background: var(--panel); border-radius: 22px; padding: 24px; box-shadow: 0 20px 60px rgb(0 0 0 / 0.25); }
+.dialog { width: min(440px, 100%); background: var(--panel); border-radius: var(--r); padding: 24px; box-shadow: 0 20px 60px rgb(0 0 0 / 0.25); }
 .dialog-icon { color: var(--accent); margin-bottom: 8px; }
 .dialog h3 { font-weight: 500; font-size: 22px; margin-bottom: 8px; }
 .dialog p { margin-bottom: 10px; }

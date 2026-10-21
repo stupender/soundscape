@@ -64,7 +64,13 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header keyNow={key} setKey={setKey} sa={sa} openTips={() => setTips(guessSection())} />
+      <Header
+        keyNow={key}
+        setKey={setKey}
+        sa={sa}
+        openTips={() => setTips(guessSection())}
+        playing={Object.values(layers).some((l) => l.on)}
+      />
       <main className="grid">
         <div className="col">
           <Soundscape

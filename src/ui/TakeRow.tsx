@@ -13,6 +13,8 @@ import { readPref, writePref } from '../store/prefs.ts';
 
 interface Props {
   take: Take;
+  /** Its number, oldest = 01, like the Raga Practice Library's rows. */
+  number: number;
   open: boolean;
   onOpen: () => void;
   onDelete: () => void;
@@ -21,7 +23,7 @@ interface Props {
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 const fileBase = (t: Take) => `${t.name.replace(/[^\w\- ]+/g, '').trim().replace(/\s+/g, '-')}-${new Date(t.createdAt).toISOString().slice(0, 10)}`;
 
-export function TakeRow({ take, open, onOpen, onDelete }: Props) {
+export function TakeRow({ take, number, open, onOpen, onDelete }: Props) {
   const [mix, setMix] = useState<MixSettings>(() => readPref(`mix.${take.id}`, { voiceDb: 0, bedDb: 0, tidy: false }));
   const [playing, setPlaying] = useState(false);
   const [pos, setPos] = useState(0);
@@ -116,6 +118,7 @@ export function TakeRow({ take, open, onOpen, onDelete }: Props) {
   return (
     <li className={`take ${open ? 'take--open' : ''}`}>
       <div className="take-head">
+        <span className="take-num">{String(number).padStart(2, '0')}</span>
         <button className="take-play" onClick={() => (playing ? stop() : play())} aria-label={playing ? 'Stop' : 'Play'}>
           {playing ? <span className="icon-stop" /> : <span className="icon-play" />}
         </button>

@@ -8,12 +8,14 @@ interface Props {
   setKey: (k: Key) => void;
   sa: () => number;
   openTips: () => void;
+  /** Is any soundscape layer sounding? (The mark's orbs move while it is.) */
+  playing: boolean;
 }
 
 const LENGTHS = [5, 10, 20, 30];
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
-export function Header({ keyNow, setKey, sa, openTips }: Props) {
+export function Header({ keyNow, setKey, sa, openTips, playing }: Props) {
   const [session, setSession] = useState<SessionState>({ running: false, total: 0, elapsed: 0 });
   const [picking, setPicking] = useState(false);
   useEffect(() => onSession(setSession), []);
@@ -21,9 +23,16 @@ export function Header({ keyNow, setKey, sa, openTips }: Props) {
   return (
     <header className="topbar">
       <div className="wordmark">
-        <svg className="mark" viewBox="0 0 48 48" aria-hidden="true">
-          <circle cx="24" cy="24" r="4" /><circle cx="24" cy="24" r="11" /><circle cx="24" cy="24" r="18" />
-        </svg>
+        {/* The studio mark, as on beingsound.studio. Its orbs circle while the soundscape sounds. */}
+        <span className={`mark ${playing ? 'mark--playing' : ''}`} aria-hidden="true">
+          <span className="mark-ink" />
+          <svg className="mark-orbits" viewBox="0 0 40 40">
+            <circle className="ring" cx="20" cy="20" r="14.5" />
+            <circle className="ring" cx="20" cy="20" r="18.6" />
+            <g className="orb orb1"><circle cx="20" cy="5.5" r="1.9" /></g>
+            <g className="orb orb2"><circle cx="20" cy="1.4" r="1.9" /></g>
+          </svg>
+        </span>
         <div>
           <h1>Soundscape</h1>
           <span className="subtitle">Being Sound Studio</span>

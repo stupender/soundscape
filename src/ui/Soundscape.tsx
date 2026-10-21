@@ -122,34 +122,49 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
         ))}
       </div>
 
+      {/* THE CARDS — the Raga Practice Library's anatomy (RagaCard.tsx there):
+          number and one fact over a rule, the name in bold caps, its mood
+          line, and its picture rising from the bottom edge. The whole card is
+          the on/off button (underneath); the slider sits on top of it. */}
       <div className="tiles">
-        {all.map((def) => {
+        {all.map((def, i) => {
           const s = stateOf(def.id);
+          const fact = s.on ? 'on' : def.pitched ? `Sa ${keyNow.name}` : '';
           return (
             <div key={def.id} className={`tile ${s.on ? 'tile--on' : ''}`} style={{ '--tint': def.tint } as React.CSSProperties}>
-              <button className="tile-face" onClick={() => toggle(def)} aria-pressed={s.on}>
-                {def.image && <img className="tile-img" src={`${import.meta.env.BASE_URL}${def.image}`} alt="" />}
-                <span className="tile-icon"><LayerIcon id={def.icon} /></span>
-                <span className="tile-name">{def.name}</span>
-                <span className="tile-note">
-                  {loading[def.id] ? 'loading…' : def.pitched ? `${def.note} · ${keyNow.name}` : def.note}
+              <button className="tile-face" onClick={() => toggle(def)} aria-pressed={s.on} aria-label={`${def.name}, ${def.note}`} />
+              <span className="tile-top">
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                <span className={s.on ? 'tile-now' : ''}>
+                  {s.on && <span className="led led--on" />}
+                  {loading[def.id] ? 'loading' : fact}
                 </span>
-                <span className={`led tile-led ${s.on ? 'led--on' : ''}`} aria-hidden="true" />
-              </button>
+              </span>
+              <span className="tile-name">{def.name}</span>
+              <span className="tile-note">{def.note}</span>
               <input
                 type="range" min={0} max={1} step={0.01} value={s.level}
                 onChange={(e) => setLevel(def.id, Number(e.target.value))}
                 aria-label={`${def.name} level`}
                 className="slider tile-slider"
               />
+              <span className="tile-picture" aria-hidden="true">
+                {def.image
+                  ? <img className="tile-img" src={`${import.meta.env.BASE_URL}${def.image}`} alt="" />
+                  : <span className="tile-icon"><LayerIcon id={def.icon} size={88} /></span>}
+              </span>
             </div>
           );
         })}
-        <button className="tile tile--add" onClick={() => fileInput.current?.click()}>
-          <span className="tile-icon"><LayerIcon id="upload" /></span>
+        <div className="tile tile--add">
+          <button className="tile-face" onClick={() => fileInput.current?.click()} aria-label="Add your own sound" />
+          <span className="tile-top"><span>+</span><span /></span>
           <span className="tile-name">Add your own</span>
           <span className="tile-note">any audio file, looped</span>
-        </button>
+          <span className="tile-picture" aria-hidden="true">
+            <span className="tile-icon"><LayerIcon id="upload" size={88} /></span>
+          </span>
+        </div>
         <input ref={fileInput} type="file" accept="audio/*" multiple hidden onChange={(e) => { addFiles(e.target.files); e.target.value = ''; }} />
       </div>
 

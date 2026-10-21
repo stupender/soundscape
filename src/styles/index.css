@@ -41,6 +41,8 @@
   --sage: #a6b598;
   --riso-blue: #33468a;
   --muted-tint: #8d9399;
+  /* The studio mark's ink (lifted a little at night so it still reads). */
+  --mark-ink: var(--riso-blue);
 
   color-scheme: light;
 }
@@ -59,6 +61,7 @@
     --space-bed: rgb(226 226 226 / 0.15);
     --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 1px 2px rgb(0 0 0 / 0.5);
     --press: 0 1px 3px rgb(0 0 0 / 0.6) inset;
+    --mark-ink: #6a7fd0;
     color-scheme: dark;
   }
 }
@@ -75,6 +78,7 @@
   --space-bed: rgb(226 226 226 / 0.15);
   --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 1px 2px rgb(0 0 0 / 0.5);
   --press: 0 1px 3px rgb(0 0 0 / 0.6) inset;
+  --mark-ink: #6a7fd0;
   color-scheme: dark;
 }
 
@@ -92,6 +96,11 @@
   --font-display: 'Ortica Linear', serif;
   --font-ui: 'Ronzino', system-ui, sans-serif;
   --font-label: 'Necto Mono', ui-monospace, monospace;
+
+  /* Corners, as on the website: printed, nearly square. Round is kept for
+     things that really are dots (LEDs, the record button, slider caps). */
+  --r: 3px;
+  --r-sm: 2px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

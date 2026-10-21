@@ -51,7 +51,14 @@ public/       recorder-worklet.js, fonts, the 12-keys audio excerpts, images.
   secondary tints) and its Collletttivo type. Tokens are in
   `src/styles/index.css`, defined for day and night.
 - An instrument, after Teenage Engineering and Kind of Studio: numbered
-  faceplate panels, mono capitals for labels, LEDs for "on".
+  panels, mono capitals for labels, LEDs for "on".
+- Corners as on the website: 2–3 px (`--r`, `--r-sm`). Round only for real
+  dots (LEDs, the record button, slider caps, play buttons).
+- The studio mark is the website's: the riso-blue ink disc with two orbs,
+  orbiting while the soundscape sounds (`Header.tsx`, `.mark` in app.css).
+- Layer tiles are the Raga Practice Library's cards: number and one fact
+  over a rule, the name in bold caps, the mood, the picture rising from the
+  bottom edge. Panel heads and take rows are numbered the same way.
 - **Coral means sound happening**: recording, the sweet spot, your voice.
   Don't spend it on decoration.
 

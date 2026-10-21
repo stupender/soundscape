@@ -30,10 +30,11 @@ export function Takes({ takes, openId, setOpenId, onDeleted }: Props) {
         </p>
       ) : (
         <ul className="takes">
-          {takes.map((t) => (
+          {takes.map((t, i) => (
             <TakeRow
               key={t.id}
               take={t}
+              number={takes.length - i}
               open={openId === t.id}
               onOpen={() => setOpenId(openId === t.id ? null : t.id)}
               onDelete={() => void remove(t.id)}
