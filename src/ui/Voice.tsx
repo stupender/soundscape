@@ -8,12 +8,15 @@
 //    let a page choose; Safari and iPhone use the system's choice, so the
 //    row says where to change it. "Test" rings the bell so you can check.
 // 2. The list updates by itself when you plug something in or take it out.
+// 3. Trim sets the level by hand; Auto listens to you sing for five seconds
+//    and sets it for you (audio/autoLevel.ts).
 // 3. Watch the meter, set the trim, glance at the "space" picture.
 // 4. Record (or press the space bar). The headphones question comes first,
 //    until you tell it not to ask.
 import { useCallback, useEffect, useState } from 'react';
 import { canPickOutput, getEngine, glide, setOutputDevice } from '../audio/engine.ts';
 import { strike } from '../audio/session.ts';
+import { measureTrim, TRIM_MAX, TRIM_MIN } from '../audio/autoLevel.ts';
 import { KEYS, saHz } from '../data/keys.ts';
 import { closeMic, listDevices, openMic, setTrim, type MicInfo } from '../audio/mic.ts';
 import { readyPads, setPadInputLatency } from '../audio/pads.ts';
@@ -51,6 +54,9 @@ export function Voice({ keyName, onTake, onMic, openTips }: Props) {
   const [elapsed, setElapsed] = useState(0);
   const [asking, setAsking] = useState(false);
   const [error, setError] = useState('');
+  // Auto level: seconds left while listening (null when not), and what it found.
+  const [listening, setListening] = useState<number | null>(null);
+  const [levelNote, setLevelNote] = useState('');
 
   const refreshDevices = useCallback(async () => {
     const d = await listDevices();
@@ -115,6 +121,16 @@ export function Voice({ keyName, onTake, onMic, openTips }: Props) {
     setTrimState(v);
     writePref('mic.trim', v);
     setTrim(v);
+  }
+
+  /** Listen to five seconds of your loudest singing, then set the trim. */
+  async function autoLevel() {
+    setLevelNote('');
+    setListening(5);
+    const result = await measureTrim(5, trim, setListening);
+    setListening(null);
+    changeTrim(result.trim);
+    setLevelNote(result.note);
   }
 
   function changeHearSelf(on: boolean) {
@@ -236,11 +252,19 @@ export function Voice({ keyName, onTake, onMic, openTips }: Props) {
       ) : (
         <div className="mic-on">
           <Meter active={!!mic} />
-          <label className="fader-row">
-            <span className="label">Trim</span>
-            <input type="range" min={0.25} max={4} step={0.01} value={trim} onChange={(e) => changeTrim(Number(e.target.value))} className="slider" />
-            <span className="value">{trim >= 1 ? '+' : ''}{(20 * Math.log10(trim)).toFixed(0)} dB</span>
-          </label>
+          <div className="trim-row">
+            <label className="fader-row fader-row--inline">
+              <span className="label">Trim</span>
+              <input type="range" min={TRIM_MIN} max={TRIM_MAX} step={0.01} value={trim} onChange={(e) => { setLevelNote(''); changeTrim(Number(e.target.value)); }} className="slider" disabled={listening !== null} />
+              <span className="value">{trim >= 1 ? '+' : ''}{(20 * Math.log10(trim)).toFixed(0)} dB</span>
+            </label>
+            <button className={`btn btn--small ${listening !== null ? 'btn--listening' : ''}`} onClick={autoLevel} disabled={listening !== null || recording} title="Sing your loudest phrase for five seconds; the trim is set for you">
+              {listening !== null ? <><span className="led led--on" />{listening}</> : 'Auto'}
+            </button>
+          </div>
+          <p className={`quiet level-note ${listening !== null ? 'level-note--live' : ''}`} aria-live="polite">
+            {listening !== null ? 'Listening… sing your loudest phrase.' : levelNote}
+          </p>
           <div className="switches">
             <label className="switch">
               <input type="checkbox" checked={hearSelf} onChange={(e) => changeHearSelf(e.target.checked)} />

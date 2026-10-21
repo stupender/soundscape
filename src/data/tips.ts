@@ -102,7 +102,7 @@ export const TIPS: TipSection[] = [
     name: 'Before you press record',
     intro: 'Thirty seconds of setting up saves a take.',
     tips: [
-      { title: 'Set your level', body: 'Sing the loudest phrase of the piece and watch the meter. The coral zone is the sweet spot. Red means too loud: move back or turn the gain down.' },
+      { title: 'Set your level', body: 'Press Auto beside Trim and sing the loudest phrase of the piece for five seconds; the trim is set for you. Or sing and watch the meter yourself: the coral zone is the sweet spot, red means too loud.' },
       { title: 'Check the space for your voice', body: 'The "space" picture shows where the soundscape sits (grey) and where your voice sits (coral). If they pile up in the same place, turn down the layers that crowd you.' },
       { title: 'Settle first', body: 'Start recording, then take a breath and let a few seconds of soundscape pass before you sing. You can trim the start later.' },
     ],

@@ -22,3 +22,4 @@
 - **Transient activation**: a browser lets a page do some things (sharing, sound) only right after a tap. That's why Share may say "Share now" after a slow mix. → `ui/TakeRow.tsx`
 - **Pointer capture**: a pad keeps listening to the finger that pressed it, even if the finger slides a little off. → `ui/Pads.tsx`
 - **Spectrum on a log scale**: each octave gets equal width, which is how ears hear pitch. → `ui/Space.tsx`
+- **Percentile, not maximum**: Auto level takes the 97th-percentile peak, so one click or bump doesn't set the level for the whole take. → `audio/autoLevel.ts`

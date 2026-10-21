@@ -166,6 +166,14 @@ select option { background: var(--panel); color: var(--ink); }
 .fader-row--inline { margin-top: 0; flex: 1; }
 .fader-row--inline .label { min-width: 0; }
 
+/* Trim with its Auto button beside it, and a line saying what Auto found. */
+.trim-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.trim-row .fader-row--inline .label { min-width: 88px; }
+.btn--listening { color: var(--accent); border-color: var(--accent); min-width: 64px; }
+.level-note { min-height: 0; margin-top: 6px; }
+.level-note:empty { display: none; }
+.level-note--live { color: var(--accent); }
+
 /* A switch: a small ruled box with a square that slides; on = filled with ink. */
 .switches { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 12px; }
 .switch { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
