@@ -95,8 +95,32 @@ export default function App() {
         </div>
       </main>
       <footer className="foot">
-        <span>Takes stay on this device. Nothing is uploaded.</span>
-        <a href="https://beingsound.studio">beingsound.studio</a>
+        {/* CREDITS — whose sounds these are. Keep this list true when layers change. */}
+        <dl className="credits">
+          <div>
+            <dt>Shruti box</dt>
+            <dd>
+              Alex Xander Jacobs, <cite>Shruti Box Drone All 12 Tones</cite> (2016), used with permission ·{' '}
+              <a href="https://musicforspiritualpractice.bandcamp.com" target="_blank" rel="noreferrer">musicforspiritualpractice.bandcamp.com</a>
+            </dd>
+          </div>
+          <div>
+            <dt>Soundscape in 12 Keys</dt>
+            <dd>Stu Pender, from the Walking Distance Residency</dd>
+          </div>
+          <div>
+            <dt>Field recordings</dt>
+            <dd>Stu Pender: Pennsylvania, Serenity Ridge (Virginia), Carmel (California), Illinois</dd>
+          </div>
+          <div>
+            <dt>Type</dt>
+            <dd><a href="https://www.collletttivo.it/typefaces" target="_blank" rel="noreferrer">Collletttivo</a>: Ortica Linear, Ronzino, Necto Mono</dd>
+          </div>
+        </dl>
+        <div className="foot-line">
+          <span>Takes stay on this device. Nothing is uploaded.</span>
+          <a href="https://beingsound.studio">beingsound.studio</a>
+        </div>
       </footer>
       {tips && <Tips section={tips} setSection={setTips} onClose={() => setTips(null)} />}
     </div>

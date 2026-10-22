@@ -9,9 +9,9 @@
 // decoded at all: they stream from an <audio> element instead, which loops on
 // its own. Anything over 40 MB takes that path.
 //
-// The 12-keys layer swaps recordings when the key changes, crossfading from
-// the old key to the new one.
-import { KEYS, type Key } from '../data/keys.ts';
+// The layers with a recording per key (the Soundscape in 12 Keys, the shruti
+// box) swap recordings when the key changes, crossfading old into new.
+import type { Key } from '../data/keys.ts';
 import { shell, type Sound, type SoundMaker } from './sound.ts';
 
 const decoded = new Map<string, Promise<AudioBuffer>>();
@@ -120,46 +120,42 @@ export function fileSound(path: string): SoundMaker {
   };
 }
 
-const keyUrl = (key: Key) => `${import.meta.env.BASE_URL}audio/keys/${key.file}`;
-
 /**
- * THE SOUNDSCAPE IN 12 KEYS — Stu's own soundscape, one recording per key.
- * Changing the key crossfades over four seconds into that key's recording.
+ * A LAYER WITH ONE RECORDING PER KEY — the Soundscape in 12 Keys and the
+ * shruti box. `pathFor` says where a key's file is (under public/). Changing
+ * the key crossfades over four seconds into that key's recording.
  */
-export const keysSound: SoundMaker = async (ctx, env) => {
-  const out = ctx.createGain();
-  let current = { gain: ctx.createGain(), stop: () => {} };
-  current.gain.connect(out);
-  current.stop = crossfadeLoop(ctx, await loadBuffer(ctx, keyUrl(env.key)), current.gain);
-  let wanted = env.key.name;
+export function keyedSound(pathFor: (key: Key) => string): SoundMaker {
+  const url = (key: Key) => `${import.meta.env.BASE_URL}${pathFor(key)}`;
+  return async (ctx, env) => {
+    const out = ctx.createGain();
+    let current = { gain: ctx.createGain(), stop: () => {} };
+    current.gain.connect(out);
+    current.stop = crossfadeLoop(ctx, await loadBuffer(ctx, url(env.key)), current.gain);
+    let wanted = env.key.name;
 
-  const sound: Sound = {
-    out,
-    stop() {
-      current.stop();
-      out.disconnect();
-    },
-    async retune(_sa, key) {
-      wanted = key.name;
-      const buffer = await loadBuffer(ctx, keyUrl(key));
-      if (wanted !== key.name) return; // the key changed again while loading
-      const old = current;
-      const gain = ctx.createGain();
-      gain.gain.value = 0;
-      gain.connect(out);
-      current = { gain, stop: crossfadeLoop(ctx, buffer, gain) };
-      const t = ctx.currentTime;
-      gain.gain.linearRampToValueAtTime(1, t + 4);
-      old.gain.gain.setValueAtTime(old.gain.gain.value, t);
-      old.gain.gain.linearRampToValueAtTime(0, t + 4);
-      window.setTimeout(() => { old.stop(); old.gain.disconnect(); }, 4500);
-    },
+    const sound: Sound = {
+      out,
+      stop() {
+        current.stop();
+        out.disconnect();
+      },
+      async retune(_sa, key) {
+        wanted = key.name;
+        const buffer = await loadBuffer(ctx, url(key));
+        if (wanted !== key.name) return; // the key changed again while loading
+        const old = current;
+        const gain = ctx.createGain();
+        gain.gain.value = 0;
+        gain.connect(out);
+        current = { gain, stop: crossfadeLoop(ctx, buffer, gain) };
+        const t = ctx.currentTime;
+        gain.gain.linearRampToValueAtTime(1, t + 4);
+        old.gain.gain.setValueAtTime(old.gain.gain.value, t);
+        old.gain.gain.linearRampToValueAtTime(0, t + 4);
+        window.setTimeout(() => { old.stop(); old.gain.disconnect(); }, 4500);
+      },
+    };
+    return sound;
   };
-  return sound;
-};
-
-/** Warm the cache for a key's recording, so switching to it is quick. */
-export function preloadKey(ctx: AudioContext, name: string): void {
-  const key = KEYS.find((k) => k.name === name);
-  if (key) void loadBuffer(ctx, keyUrl(key));
 }

@@ -45,6 +45,8 @@ public/       recorder-worklet.js, fonts, the 12-keys audio excerpts, images.
 - **Call processing is off by default** (echo cancellation, noise suppression,
   auto-gain). They're for video calls and harm a singing voice.
 - **Takes never leave the device** unless the person exports or shares one.
+- **Credit every sound that isn't Stu's** in the footer (`App.tsx`), and only
+  add one with the maker's permission: the repo and the site are public.
 - **Deleting a take takes two clicks.** No `window.confirm`.
 
 ## Look and feel

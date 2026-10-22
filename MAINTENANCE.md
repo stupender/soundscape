@@ -69,6 +69,14 @@ ffmpeg -ss 300 -t 180 -i "Soundscape in C.wav" -ac 2 -ar 44100 -b:a 160k soundsc
 
 Masters: `Song Catalog/4 Projects/Walking Distance Residency/Soundscape In 12 Keys`.
 
+## The shruti box
+
+`public/audio/shruti/shruti-<key>.mp3`: Alex Xander Jacobs, *Shruti Box Drone
+All 12 Tones* (2016), used with his permission and credited in the footer.
+From each key's file, 2:00 to 4:30 (150 s), levelled to −18 LUFS (the
+originals differ by up to 5 dB between keys), 160 kbps. If the credit or the
+permission ever changes, update the footer in `src/App.tsx`.
+
 ## The field recordings
 
 `public/audio/field/` holds excerpts of Stu's field recordings, each a few

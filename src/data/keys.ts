@@ -16,23 +16,24 @@ export interface Key {
   name: string;
   /** Semitones above C (0–11). */
   pc: number;
-  /** Which recording in public/audio/keys/ belongs to this key. */
-  file: string;
+  /** The key's short name in file names: the Soundscape in 12 Keys is
+   *  audio/keys/soundscape-<slug>.mp3, the shruti box audio/shruti/shruti-<slug>.mp3. */
+  slug: string;
 }
 
 export const KEYS: Key[] = [
-  { name: 'C', pc: 0, file: 'soundscape-C.mp3' },
-  { name: 'D♭', pc: 1, file: 'soundscape-Db.mp3' },
-  { name: 'D', pc: 2, file: 'soundscape-D.mp3' },
-  { name: 'E♭', pc: 3, file: 'soundscape-Eb.mp3' },
-  { name: 'E', pc: 4, file: 'soundscape-E.mp3' },
-  { name: 'F', pc: 5, file: 'soundscape-F.mp3' },
-  { name: 'G♭', pc: 6, file: 'soundscape-Gb.mp3' },
-  { name: 'G', pc: 7, file: 'soundscape-G.mp3' },
-  { name: 'A♭', pc: 8, file: 'soundscape-Ab.mp3' },
-  { name: 'A', pc: 9, file: 'soundscape-A.mp3' },
-  { name: 'B♭', pc: 10, file: 'soundscape-Bb.mp3' },
-  { name: 'B', pc: 11, file: 'soundscape-B.mp3' },
+  { name: 'C', pc: 0, slug: 'C' },
+  { name: 'D♭', pc: 1, slug: 'Db' },
+  { name: 'D', pc: 2, slug: 'D' },
+  { name: 'E♭', pc: 3, slug: 'Eb' },
+  { name: 'E', pc: 4, slug: 'E' },
+  { name: 'F', pc: 5, slug: 'F' },
+  { name: 'G♭', pc: 6, slug: 'Gb' },
+  { name: 'G', pc: 7, slug: 'G' },
+  { name: 'A♭', pc: 8, slug: 'Ab' },
+  { name: 'A', pc: 9, slug: 'A' },
+  { name: 'B♭', pc: 10, slug: 'Bb' },
+  { name: 'B', pc: 11, slug: 'B' },
 ];
 
 const C3 = 130.81;
@@ -40,9 +41,4 @@ const C3 = 130.81;
 /** Sa's frequency in Hz for a key (in the octave above C3). */
 export function saHz(key: Key): number {
   return C3 * Math.pow(2, key.pc / 12);
-}
-
-/** A frequency a number of semitones above (or below) Sa. */
-export function above(sa: number, semitones: number): number {
-  return sa * Math.pow(2, semitones / 12);
 }

@@ -28,9 +28,9 @@ can stay small while the vision stays whole. Ordered loosely from "next" to
 - **A count-in** or "settle" breath before recording starts.
 - **Pads, saved.** Keep pad recordings across reloads (IndexedDB, like takes),
   and let a pad loop instead of playing once.
-- **A recorded shruti box** in all 12 keys, to replace the synthesised one.
-  (Removed the synthesised tanpura 2026-10-21: not good enough. A recorded
-  one could come back the same way.)
+- ~~**A recorded shruti box**~~ Done 2026-10-21: Alex Xander Jacobs's, in
+  all 12 keys. (The synthesised tanpura was removed the same day: not good
+  enough. A recorded one could come back as a `keyedSound` layer.)
 - **Install it** as a home-screen app (a PWA manifest + service worker), and
   later wrap it with Capacitor for the App Store as Becoming does.
 - **Latency check.** A one-tap loopback test (play a click, hear it back) to

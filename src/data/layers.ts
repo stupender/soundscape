@@ -10,13 +10,17 @@
 //              the same level when you first turn it on
 //   pitched  — true if it follows the key
 //
+// THE SHRUTI BOX is Alex Xander Jacobs's "Shruti Box Drone All 12 Tones"
+// (musicforspiritualpractice.bandcamp.com), used with his permission and
+// credited in the page footer: one 2½-minute excerpt per key, levelled to
+// −18 LUFS, so it follows the Key like the Soundscape in 12 Keys does.
+//
 // THE FIELD RECORDINGS are Stu's own (Sound Collection/Field Recordings),
 // cut to a few minutes each and levelled to the same loudness (−18 LUFS) so
 // they sit together; they loop with a crossfade. How they were cut is in
 // MAINTENANCE.md. To add another: drop an MP3 into public/audio/field/ and
 // add an entry with `make: fileSound('audio/field/name.mp3')`.
-import { shrutiBox } from '../audio/drones.ts';
-import { fileSound, keysSound } from '../audio/loop.ts';
+import { fileSound, keyedSound } from '../audio/loop.ts';
 import type { SoundMaker } from '../audio/sound.ts';
 
 export type IconId =
@@ -38,8 +42,8 @@ export interface LayerDef {
 }
 
 export const LAYERS: LayerDef[] = [
-  { id: 'keys', name: 'Soundscape', note: 'in 12 keys · Point Reyes', icon: 'keys', tint: 'var(--night)', make: keysSound, gain: 1, pitched: true, image: 'images/point-reyes.jpg' },
-  { id: 'shruti', name: 'Shruti box', note: 'root · fifth · octave', icon: 'shruti', tint: 'var(--clay)', make: shrutiBox, gain: 0.9, pitched: true },
+  { id: 'keys', name: 'Soundscape', note: 'in 12 keys · Point Reyes', icon: 'keys', tint: 'var(--night)', make: keyedSound((k) => `audio/keys/soundscape-${k.slug}.mp3`), gain: 1, pitched: true, image: 'images/point-reyes.jpg' },
+  { id: 'shruti', name: 'Shruti box', note: 'Alex Xander Jacobs', icon: 'shruti', tint: 'var(--clay)', make: keyedSound((k) => `audio/shruti/shruti-${k.slug}.mp3`), gain: 1, pitched: true },
   { id: 'birds', name: 'Morning birds', note: 'Pennsylvania', icon: 'birds', tint: 'var(--sage)', make: fileSound('audio/field/birds-pennsylvania.mp3'), gain: 1 },
   { id: 'crickets', name: 'Evening crickets', note: 'Serenity Ridge, Virginia', icon: 'crickets', tint: 'var(--lav)', make: fileSound('audio/field/crickets-virginia.mp3'), gain: 1 },
   { id: 'ocean', name: 'Pacific Ocean', note: 'Monterey coast, Carmel', icon: 'ocean', tint: 'var(--slate)', make: fileSound('audio/field/ocean-monterey.mp3'), gain: 1 },
