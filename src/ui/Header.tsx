@@ -33,7 +33,7 @@ export function Header({ keyNow, setKey, sa, openTips, playing }: Props) {
       </div>
 
       <div className="topbar-controls">
-        <label className="key-pick" title="The key: the shruti box, tanpura, bell and Soundscape in 12 Keys all follow it">
+        <label className="key-pick" title="The key: the shruti box, the bell and the Soundscape in 12 Keys all follow it">
           <span className="label">Key</span>
           <select value={keyNow.name} onChange={(e) => setKey(KEYS.find((k) => k.name === e.target.value)!)}>
             {KEYS.map((k) => <option key={k.name} value={k.name}>{k.name}</option>)}

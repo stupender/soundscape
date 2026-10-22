@@ -15,13 +15,13 @@
 // they sit together; they loop with a crossfade. How they were cut is in
 // MAINTENANCE.md. To add another: drop an MP3 into public/audio/field/ and
 // add an entry with `make: fileSound('audio/field/name.mp3')`.
-import { shrutiBox, tanpura } from '../audio/drones.ts';
+import { shrutiBox } from '../audio/drones.ts';
 import { fileSound, keysSound } from '../audio/loop.ts';
 import type { SoundMaker } from '../audio/sound.ts';
 
 export type IconId =
   | 'birds' | 'crickets' | 'ocean' | 'river' | 'storm'
-  | 'shruti' | 'tanpura' | 'keys' | 'upload';
+  | 'shruti' | 'keys' | 'upload';
 
 export interface LayerDef {
   id: string;
@@ -40,7 +40,6 @@ export interface LayerDef {
 export const LAYERS: LayerDef[] = [
   { id: 'keys', name: 'Soundscape', note: 'in 12 keys · Point Reyes', icon: 'keys', tint: 'var(--night)', make: keysSound, gain: 1, pitched: true, image: 'images/point-reyes.jpg' },
   { id: 'shruti', name: 'Shruti box', note: 'root · fifth · octave', icon: 'shruti', tint: 'var(--clay)', make: shrutiBox, gain: 0.9, pitched: true },
-  { id: 'tanpura', name: 'Tanpura', note: 'fifth · root · root · low root', icon: 'tanpura', tint: 'var(--timber)', make: tanpura, gain: 1.2, pitched: true },
   { id: 'birds', name: 'Morning birds', note: 'Pennsylvania', icon: 'birds', tint: 'var(--sage)', make: fileSound('audio/field/birds-pennsylvania.mp3'), gain: 1 },
   { id: 'crickets', name: 'Evening crickets', note: 'Serenity Ridge, Virginia', icon: 'crickets', tint: 'var(--lav)', make: fileSound('audio/field/crickets-virginia.mp3'), gain: 1 },
   { id: 'ocean', name: 'Pacific Ocean', note: 'Monterey coast, Carmel', icon: 'ocean', tint: 'var(--slate)', make: fileSound('audio/field/ocean-monterey.mp3'), gain: 1 },
@@ -56,8 +55,8 @@ export interface Preset {
 
 export const PRESETS: Preset[] = [
   { name: 'Dawn', layers: { birds: 0.7, river: 0.45, shruti: 0.45 } },
-  { name: 'Dusk', layers: { crickets: 0.7, tanpura: 0.6 } },
+  { name: 'Dusk', layers: { crickets: 0.7, keys: 0.4 } },
   { name: 'Shore', layers: { ocean: 0.75, keys: 0.6 } },
   { name: 'Storm', layers: { storm: 0.65, shruti: 0.45 } },
-  { name: 'Practice', layers: { tanpura: 0.8, shruti: 0.35 } },
+  { name: 'Practice', layers: { shruti: 0.7 } },
 ];

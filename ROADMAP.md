@@ -28,8 +28,9 @@ can stay small while the vision stays whole. Ordered loosely from "next" to
 - **A count-in** or "settle" breath before recording starts.
 - **Pads, saved.** Keep pad recordings across reloads (IndexedDB, like takes),
   and let a pad loop instead of playing once.
-- **Tanpura and shruti tunings:** Pa / Ma / Ni first string, as in the Raga
-  Practice Library; a female/male register.
+- **A recorded shruti box** in all 12 keys, to replace the synthesised one.
+  (Removed the synthesised tanpura 2026-10-21: not good enough. A recorded
+  one could come back the same way.)
 - **Install it** as a home-screen app (a PWA manifest + service worker), and
   later wrap it with Capacitor for the App Store as Becoming does.
 - **Latency check.** A one-tap loopback test (play a click, hear it back) to

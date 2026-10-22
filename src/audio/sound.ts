@@ -1,6 +1,6 @@
 // A SOUND — the shape every soundscape layer shares.
 //
-// A field recording, the shruti box, the tanpura: each one is a `Sound`. It has an
+// A field recording, the shruti box: each one is a `Sound`. It has an
 // `out` (where its audio leaves), it can `stop`, and if it is pitched it can
 // `retune` when the key changes. The layer manager (layers.ts) doesn't need to
 // know which kind it is holding.

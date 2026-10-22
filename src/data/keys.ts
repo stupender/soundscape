@@ -2,9 +2,9 @@
 //
 // On screen it's called the Key, in Western terms. In the code its root note
 // is still called `sa` (the Raga Practice Library's word for it), since the
-// drones and the bell are tuned to it the way a tanpura is tuned to Sa.
+// shruti box and the bell are tuned to it the way a drone is tuned to Sa.
 //
-// The shruti box, the tanpura, the bell and the Soundscape in 12 Keys all
+// The shruti box, the bell and the Soundscape in 12 Keys all
 // follow this one choice, so everything you turn on is already in tune with
 // everything else. Pick the key your voice wants and the room retunes around it.
 //

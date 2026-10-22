@@ -50,14 +50,6 @@ const paths: Record<IconId, React.ReactNode> = {
       <path d="M12 25l3 6 3-6 3 6 3-6 3 6 3-6 3 6 3-6" />
     </>
   ),
-  tanpura: (
-    <>
-      <path d="M24 4v24" />
-      <path d="M21 4h6" />
-      <ellipse cx="24" cy="36" rx="9" ry="8" />
-      <path d="M21 4v24M27 4v24" opacity="0.5" />
-    </>
-  ),
   keys: (
     <>
       <circle cx="24" cy="24" r="4" />
