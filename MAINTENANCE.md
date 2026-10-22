@@ -72,10 +72,15 @@ Masters: `Song Catalog/4 Projects/Walking Distance Residency/Soundscape In 12 Ke
 ## The shruti box
 
 `public/audio/shruti/shruti-<key>.mp3`: Alex Xander Jacobs, *Shruti Box Drone
-All 12 Tones* (2016), used with his permission and credited in the footer.
+All 12 Tones* (2016), used with his permission and credited on its card.
 From each key's file, 2:00 to 4:30 (150 s), levelled to −18 LUFS (the
-originals differ by up to 5 dB between keys), 160 kbps. If the credit or the
-permission ever changes, update the footer in `src/App.tsx`.
+originals differ by up to 5 dB between keys), 160 kbps.
+
+**Swapping in your own recordings** (the plan): record a shruti box drone in
+each of the 12 keys, cut and level each the same way, and save them over these
+files with the same names (`shruti-C.mp3`, `shruti-Db.mp3` … `shruti-B.mp3`).
+Then change the card's `note` in `src/data/layers.ts` from "Alex Xander Jacobs"
+to whatever it should say. Nothing else needs to change.
 
 ## The field recordings
 
@@ -105,8 +110,8 @@ ffmpeg -ss 15 -t 260 -i "source.wav" -af "volume=GAINdB,alimiter=limit=0.89:leve
 ## Adding a layer
 
 1. Put an excerpt in `public/audio/field/` (levelled as above) and use
-   `fileSound('audio/field/name.mp3')`, **or** write a generator in
-   `src/audio/` (see `drones.ts`).
+   `fileSound('audio/field/name.mp3')`. For something in all 12 keys, use
+   `keyedSound((k) => `audio/folder/name-${k.slug}.mp3`)` like the shruti box.
 2. Add an entry to `LAYERS` in `src/data/layers.ts`.
 3. If it needs a new icon, add a drawing to `src/ui/Icons.tsx` and its id to
    `IconId`.

@@ -12,8 +12,10 @@
 //
 // THE SHRUTI BOX is Alex Xander Jacobs's "Shruti Box Drone All 12 Tones"
 // (musicforspiritualpractice.bandcamp.com), used with his permission and
-// credited in the page footer: one 2½-minute excerpt per key, levelled to
-// −18 LUFS, so it follows the Key like the Soundscape in 12 Keys does.
+// credited on the card itself (its `note`): one 2½-minute excerpt per key,
+// levelled to −18 LUFS, so it follows the Key like the Soundscape in 12 Keys.
+// For now: Stu will replace it with his own shruti box recordings (same file
+// names in public/audio/shruti/, nothing else changes).
 //
 // THE FIELD RECORDINGS are Stu's own (Sound Collection/Field Recordings),
 // cut to a few minutes each and levelled to the same loudness (−18 LUFS) so

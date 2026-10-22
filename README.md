@@ -52,6 +52,6 @@ toward immersive rooms. See [ROADMAP.md](ROADMAP.md).
 
 - Type: Ortica Linear, Ronzino and Necto Mono by [Collletttivo](https://www.collletttivo.it/typefaces) (SIL Open Font License; licences in `public/fonts/`).
 - The *Soundscape in 12 Keys* excerpts and the field recordings are Stu Pender's. All rights reserved.
-- The shruti box is Alex Xander Jacobs, *Shruti Box Drone All 12 Tones* (2016), used with permission: [musicforspiritualpractice.bandcamp.com](https://musicforspiritualpractice.bandcamp.com). Credited in the app's footer.
+- The shruti box is Alex Xander Jacobs, *Shruti Box Drone All 12 Tones* (2016), used with permission: [musicforspiritualpractice.bandcamp.com](https://musicforspiritualpractice.bandcamp.com). Credited on its card in the app. For now: Stu's own shruti box recordings will replace it.
 - The bell comes from Becoming.
 - MP3 encoding: [@breezystack/lamejs](https://www.npmjs.com/package/@breezystack/lamejs) (LGPL).

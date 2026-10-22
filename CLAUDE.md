@@ -21,15 +21,16 @@ Read README.md first, then ROADMAP.md for where this is heading.
 
 ```
 src/data/     WHAT the app offers: keys, layers + presets, tips. Plain data.
-src/audio/    HOW it sounds: the engine, the generators, the recorder, mixdown.
+src/audio/    HOW it sounds: the engine, looping recordings, the recorder, mixdown.
 src/store/    WHAT it remembers: takes (IndexedDB), small prefs (localStorage).
 src/ui/       WHAT you see: one component per panel.
-public/       recorder-worklet.js, fonts, the 12-keys audio excerpts, images.
+public/       recorder-worklet.js, fonts, audio (keys/, shruti/, field/), images.
 ```
 
 - **Adding a soundscape layer is adding an entry to `src/data/layers.ts`.** A
-  layer's `make` is either a generator in `audio/` (the drones) or
-  `fileSound('audio/field/x.mp3')` for a recording. Nature layers are Stu's own
+  layer's `make` is `fileSound('audio/field/x.mp3')` for a recording, or
+  `keyedSound(...)` for one recording per key (the 12-keys soundscape, the
+  shruti box). Nature layers are Stu's own
   field recordings, never synthesised; level new ones to −18 LUFS (MAINTENANCE.md).
 - Every sound is a `Sound` (`audio/sound.ts`): an `out`, `stop()`, and
   optionally `retune()` for the key.
@@ -45,8 +46,9 @@ public/       recorder-worklet.js, fonts, the 12-keys audio excerpts, images.
 - **Call processing is off by default** (echo cancellation, noise suppression,
   auto-gain). They're for video calls and harm a singing voice.
 - **Takes never leave the device** unless the person exports or shares one.
-- **Credit every sound that isn't Stu's** in the footer (`App.tsx`), and only
-  add one with the maker's permission: the repo and the site are public.
+- **Credit every sound that isn't Stu's** on its card (the layer's `note`) and
+  in the README, and only add one with the maker's permission: the repo and
+  the site are public. The goal is all of Stu's own recordings.
 - **Deleting a take takes two clicks.** No `window.confirm`.
 
 ## Look and feel

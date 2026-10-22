@@ -520,17 +520,8 @@ select option { background: var(--panel); color: var(--ink); }
 .seg-btn--on { background: var(--ink); color: var(--on-ink); }
 
 /* ---- Footer -------------------------------------------------------------- */
-/* The footer: credits as ruled rows (label left, words right), then one
-   mono line saying takes stay on the device. */
-.foot { padding: 28px 2px 0; color: var(--muted); }
-.credits { margin: 0 0 18px; border-top: 1px solid var(--ink); }
-.credits > div { display: grid; grid-template-columns: minmax(110px, 180px) 1fr; gap: 4px 16px; padding: 9px 0; border-bottom: 1px solid var(--hair); }
-.credits dt { font-family: var(--font-label); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; padding-top: 2px; }
-.credits dd { margin: 0; font-size: 13px; color: var(--ink); }
-.credits cite { font-style: italic; }
-.credits a { color: inherit; text-underline-offset: 0.2em; }
-.credits a:hover { color: var(--accent); }
-@media (max-width: 520px) { .credits > div { grid-template-columns: 1fr; } }
+/* The footer: one mono line saying takes stay on the device. */
+.foot { padding: 22px 2px 0; color: var(--muted); }
 .foot-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: var(--font-label); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
 .foot-line a { color: inherit; }
 
