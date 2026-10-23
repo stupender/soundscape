@@ -119,7 +119,23 @@
 }
 .chip:hover { border-color: var(--ink); background: var(--ink); color: var(--on-ink); }
 .chip--on { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
-.chip--icon { padding: 6px 8px; }
+.chip--icon { padding: 0; width: 32px; justify-content: center; }
+.chip:disabled { opacity: 0.35; }
+.chip:disabled:hover { background: transparent; color: inherit; border-color: var(--hair-strong); }
+/* Every chip is the same height, icon or words, so they line up in a row. */
+.chip { height: 32px; }
+.chip--add { padding: 0; width: 32px; justify-content: center; font-size: 15px; }
+
+/* An icon button with no box (the speaker): ink on hover, lit while on. */
+.icon-btn { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 0; background: transparent; color: var(--muted); transition: color 0.15s; }
+.icon-btn:hover:not(:disabled) { color: var(--ink); }
+.icon-btn--on { color: var(--ink); }
+.icon-btn:disabled { opacity: 0.35; }
+
+/* A bare text field: a line to write on, like the selects. */
+.line-field { min-width: 0; border: 0; border-bottom: 1px solid var(--hair-strong); border-radius: 0; background: transparent; padding: 5px 0; font: inherit; font-size: 14px; color: var(--ink); }
+.line-field:hover { border-bottom-color: var(--ink); }
+.line-field:focus-visible { outline: none; border-bottom-color: var(--accent); }
 
 /* A select is a bare field: a line to choose on, not a box. */
 select {
@@ -271,6 +287,20 @@ select option { background: var(--panel); color: var(--ink); }
   line-height: 1;
   letter-spacing: -0.01em;
 }
+/* BETA: a small outlined tag beside the name, in the label face. */
+.beta {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 3px 5px 2px;
+  border: 1px solid var(--hair-strong);
+  font-family: var(--font-label);
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  vertical-align: 6px;
+}
 .subtitle {
   display: block;
   margin-top: 4px;
@@ -305,19 +335,29 @@ select option { background: var(--panel); color: var(--ink); }
 .panel-head {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: 6px 12px;
   margin-bottom: 14px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--ink);
 }
 .panel-head h2 { font-weight: 700; font-size: 16px; letter-spacing: 0.02em; text-transform: uppercase; }
-.panel-head .led { margin-right: auto; align-self: center; }
+.panel-head .led { margin-right: auto; }
 .panel-num { font-family: var(--font-label); font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; }
 .panel-credit { white-space: nowrap; font-family: var(--font-label); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-right: auto; }
 
 /* ---- 01 Soundscape: presets and tiles ------------------------------------ */
-.presets { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin: 0 -2px 12px; scrollbar-width: none; }
+.presets { display: flex; align-items: center; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin: 0 -2px 12px; scrollbar-width: none; }
+.presets-edit { margin-left: auto; }
+.preset-new { display: inline-flex; align-items: center; gap: 8px; flex: none; }
+.preset-new .line-field { width: 9em; }
+/* Editing: each preset becomes a ruled row (name field, Update, ×). */
+.presets--editing { flex-direction: column; align-items: stretch; gap: 0; overflow: visible; border-top: 1px solid var(--hair); }
+.preset-edit { display: flex; align-items: center; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--hair); }
+.preset-edit .line-field { flex: 1; border-bottom-color: transparent; }
+.preset-edit .line-field:hover { border-bottom-color: var(--hair-strong); }
+.preset-edit-actions { display: inline-flex; gap: 6px; }
+.preset-edit-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
 .presets::-webkit-scrollbar { display: none; }
 
 .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -499,9 +539,11 @@ select option { background: var(--panel); color: var(--ink); }
 .take-play:hover, .take-play--on { background: var(--ink); color: var(--on-ink); }
 .take-title { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; background: none; border: 0; padding: 0; text-align: left; }
 /* The arrow that opens a take's mixer: points down closed, up open. */
-.take-toggle { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border: 0; background: transparent; color: var(--muted); transition: transform 0.2s, color 0.15s; }
-.take-toggle:hover { color: var(--ink); }
-.take-toggle--open { transform: rotate(180deg); color: var(--ink); }
+.take-toggle { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; border: 1px solid var(--hair-strong); background: transparent; color: var(--ink); font-family: var(--font-label); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; transition: background-color 0.15s, color 0.15s, border-color 0.15s; }
+.take-toggle:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.take-toggle .caret { transition: transform 0.2s; }
+.take-toggle--open { border-color: var(--ink); }
+.take-toggle--open .caret { transform: rotate(180deg); }
 .take-title:hover .take-name { text-decoration: underline; text-underline-offset: 0.2em; }
 .take-num { font-family: var(--font-label); font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; min-width: 1.6em; }
 .take-name { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }

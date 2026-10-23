@@ -1,4 +1,4 @@
-// 02 VOICE — where the sound comes in, where it goes out, and the record button.
+// 02 RECORD — where the sound comes in, where it goes out, and the record button.
 //
 // 1. INPUT and OUTPUT sit at the top as two ruled rows, always on show.
 //    Input: which mic (the phone's, the laptop's, a USB mic, an interface)
@@ -196,7 +196,7 @@ export function Voice({ keyName, onTake, onMic, openTips }: Props) {
     <section className="panel" aria-labelledby="voice-h">
       <header className="panel-head">
         <span className="panel-num">02</span>
-        <h2 id="voice-h">Voice</h2>
+        <h2 id="voice-h">Record</h2>
         <span className={`led ${mic ? 'led--on' : ''}`} aria-hidden="true" />
         <button className="text-btn" onClick={() => openTips('headphones')}>Tips</button>
       </header>

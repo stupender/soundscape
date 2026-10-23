@@ -66,7 +66,8 @@ public/       recorder-worklet.js, fonts, audio (keys/, shruti/, field/), images
   lines; lists are ruled rows; play is a ringed circle that fills with ink.
   Round only for real dots (LEDs, the record button, slider caps, play).
 - The one glow allowed is light: a lit LED glows. Never add drop shadows.
-- Voice opens with two ruled rows, Input and Output, always visible.
+- Record (panel 02) opens with two ruled rows, Input and Output, always visible.
+- The app is in **Beta** (the tag beside the name in `Header.tsx`).
 - The studio mark is the website's: the riso-blue ink disc with two orbs,
   orbiting while the soundscape sounds (`Header.tsx`, `.mark` in app.css).
 - Layer tiles are the Raga Practice Library's cards: number and one fact

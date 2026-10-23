@@ -27,7 +27,7 @@ export function Header({ keyNow, setKey, sa, openTips, playing }: Props) {
           </svg>
         </span>
         <div>
-          <h1>Soundscape</h1>
+          <h1>Soundscape <span className="beta">Beta</span></h1>
           <span className="subtitle">Being Sound Studio</span>
         </div>
       </div>

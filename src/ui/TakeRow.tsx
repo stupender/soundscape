@@ -132,7 +132,8 @@ export function TakeRow({ take, number, open, onOpen, onDelete }: Props) {
           <span className="take-meta">{when} · {clock(take.seconds)}</span>
         </button>
         <button className={`take-toggle ${open ? 'take-toggle--open' : ''}`} onClick={onOpen} aria-expanded={open} aria-label={open ? 'Close the mixer' : 'Open the mixer'}>
-          <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
+          <span>Mix</span>
+          <svg className="caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1 L5 5 L9 1" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
         </button>
       </div>
       <div className="take-bar" onPointerDown={seek} role="slider" aria-label="Position" aria-valuemin={0} aria-valuemax={take.seconds} aria-valuenow={pos}>

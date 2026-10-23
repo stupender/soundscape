@@ -1,16 +1,20 @@
 // 01 SOUNDSCAPE — the tiles. Tap a tile to bring a layer in; its slider sets
-// how loud. Presets turn on a few at once. "Add your own" loops any audio file
-// from your device as another layer.
+// how loud. Presets turn on a few at once, and can be edited (ui/Presets.tsx).
+// "Add your own" loops any audio file from your device as another layer.
+//
+// The speaker in the corner: waves when something's playing (tap to quiet
+// everything), muted when it's all quiet (tap to bring back what was playing).
 //
 // The layer state (on/off and level for each) lives in App.tsx; this panel
 // shows it and asks the audio side (audio/layers.ts) to follow.
 import { useRef, useState } from 'react';
-import { LAYERS, PRESETS, type LayerDef } from '../data/layers.ts';
+import { LAYERS, type LayerDef } from '../data/layers.ts';
 import { getEngine, glide } from '../audio/engine.ts';
 import { startLayer, stopLayer, setLayerLevel } from '../audio/layers.ts';
 import { uploadSound } from '../audio/loop.ts';
 import type { Key } from '../data/keys.ts';
-import { LayerIcon } from './Icons.tsx';
+import { LayerIcon, SpeakerIcon } from './Icons.tsx';
+import { Presets } from './Presets.tsx';
 
 export interface LayerState {
   on: boolean;
@@ -31,6 +35,8 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
   const [loading, setLoading] = useState<Record<string, boolean>>({});
   const [error, setError] = useState('');
   const fileInput = useRef<HTMLInputElement>(null);
+  // What was playing when you last quieted everything, so the speaker can bring it back.
+  const beforeQuiet = useRef<Record<string, number> | null>(null);
   const all = [...LAYERS, ...uploads];
 
   const stateOf = (id: string): LayerState => layers[id] ?? { on: false, level: 0.6 };
@@ -72,7 +78,7 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
       const want = layersWanted[def.id];
       if (want === undefined && stateOf(def.id).on) turnOff(def.id);
     }
-    for (const def of LAYERS) {
+    for (const def of all) {
       const want = layersWanted[def.id];
       if (want === undefined) continue;
       if (stateOf(def.id).on) setLevel(def.id, want);
@@ -80,8 +86,19 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
     }
   }
 
+  /** What's playing now, as layer id → level. `builtInOnly` leaves out uploads. */
+  function playing(builtInOnly = false): Record<string, number> {
+    const list = builtInOnly ? LAYERS : all;
+    return Object.fromEntries(list.filter((d) => stateOf(d.id).on).map((d) => [d.id, stateOf(d.id).level]));
+  }
+
   function hush() {
+    beforeQuiet.current = playing();
     for (const def of all) if (stateOf(def.id).on) turnOff(def.id);
+  }
+
+  function unhush() {
+    if (beforeQuiet.current) applyPreset(beforeQuiet.current);
   }
 
   function addFiles(files: FileList | null) {
@@ -111,16 +128,18 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
         <span className="panel-num">01</span>
         <h2 id="soundscape-h">Soundscape</h2>
         <span className={`led ${anyOn ? 'led--on' : ''}`} aria-hidden="true" />
-        <button className="text-btn" onClick={hush} disabled={!anyOn}>All quiet</button>
+        <button
+          className={`icon-btn ${anyOn ? 'icon-btn--on' : ''}`}
+          onClick={anyOn ? hush : unhush}
+          disabled={!anyOn && !beforeQuiet.current}
+          aria-label={anyOn ? 'Quiet everything' : 'Bring back what was playing'}
+          title={anyOn ? 'Quiet everything' : 'Bring back what was playing'}
+        >
+          <SpeakerIcon on={anyOn} />
+        </button>
       </header>
 
-      <div className="presets" role="group" aria-label="Presets">
-        {PRESETS.map((p) => (
-          <button key={p.name} className="chip" onClick={() => applyPreset(p.layers)}>
-            {p.name}
-          </button>
-        ))}
-      </div>
+      <Presets current={() => playing(true)} apply={applyPreset} />
 
       {/* THE CARDS — the Raga Practice Library's anatomy (RagaCard.tsx there):
           number and one fact over a rule, the name in bold caps, its mood
