@@ -16,6 +16,11 @@
 //
 // TIME is kept against the clock, not by counting ticks, so a phone that
 // slows background timers still ends on time.
+//
+// THE SCREEN stays awake for the length of a session (the Screen Wake Lock
+// API), so a phone doesn't lock itself halfway through a sit and pause the
+// sound. The browser drops the lock whenever the page is hidden, so it's
+// asked for again when the page comes back.
 import { getEngine, glide } from './engine.ts';
 
 /** One strike of the bowl at `when` (audio clock), pitched two octaves above Sa. */
@@ -57,6 +62,28 @@ const listeners = new Set<(s: SessionState) => void>();
 
 const tell = () => listeners.forEach((fn) => fn({ ...state }));
 
+// ── Keeping the screen awake ─────────────────────────────────────
+let wakeLock: WakeLockSentinel | null = null;
+
+async function keepAwake(): Promise<void> {
+  if (!('wakeLock' in navigator) || wakeLock) return;
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    wakeLock.addEventListener('release', () => { wakeLock = null; });
+  } catch {
+    /* refused (low battery, page hidden): the session still runs */
+  }
+}
+
+function letSleep(): void {
+  void wakeLock?.release();
+  wakeLock = null;
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && state.running) void keepAwake();
+});
+
 export function onSession(fn: (s: SessionState) => void): () => void {
   listeners.add(fn);
   fn({ ...state });
@@ -78,6 +105,7 @@ export function startSession(minutes: number, sa: () => number): void {
   startedAt = performance.now();
   fadingOut = false;
   state = { running: true, total: minutes * 60, elapsed: 0 };
+  void keepAwake();
   timer = window.setInterval(tickSession, 500);
   tell();
 }
@@ -109,5 +137,6 @@ export function endSession(early: boolean): void {
   fade.gain.setValueAtTime(0, t + strikes * 4.5 + 6);
   fade.gain.linearRampToValueAtTime(1, t + strikes * 4.5 + 12);
   state = { running: false, total: state.total, elapsed: state.elapsed };
+  letSleep();
   tell();
 }

@@ -23,7 +23,9 @@ export function HeadphonesPrompt({ onAnswer }: Props) {
         </p>
         <p className="dialog-quiet">
           Without headphones, the soundscape plays out loud and the mic records it into your voice track too.
-          On a phone with Bluetooth headphones, the phone may switch to their mic. Wired is best.
+          <strong> For recording, wired headphones are best.</strong> With AirPods or other Bluetooth headphones,
+          a phone switches them to call quality while the mic is on, so the soundscape sounds thin and the voice
+          may be recorded through their mic instead of the phone's.
         </p>
         <label className="check">
           <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />

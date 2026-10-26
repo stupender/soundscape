@@ -50,6 +50,11 @@ public/       recorder-worklet.js, fonts, audio (keys/, shruti/, field/), images
   in the README, and only add one with the maker's permission: the repo and
   the site are public. The goal is all of Stu's own recordings.
 - **Deleting a take takes two clicks.** No `window.confirm`.
+- **No health or "brainwave" claims, ever.** Before writing any wording for
+  breath, coherence, binaural beats or sleep, read "Claims the app must not
+  make" at the end of RESEARCH.md and use its safe phrasing ("for relaxation
+  and rest", not "reduces anxiety", "entrains your brain" or "healing
+  frequencies"). No coherence or HRV score without a heart sensor.
 
 ## Look and feel
 

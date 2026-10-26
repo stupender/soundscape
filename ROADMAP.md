@@ -3,7 +3,8 @@
 Everything past V1 is deliberately **not** built yet. It's written down so the
 code can stay small while the vision stays whole. Stages run from "next" to
 "horizon"; each stage has a short **why**, then the pieces. Research that
-informs each stage is collected in [RESEARCH.md](RESEARCH.md) as it arrives.
+informs each stage is in [RESEARCH.md](RESEARCH.md) (October 2026), including
+the claims the app must not make.
 
 ---
 
@@ -54,11 +55,18 @@ soundscape or a teaching tool depending on which modules are in it.
 
 - **The module rack.** Each module declares what it needs (the key, the
   soundscape bus, the mic, a clock) and what it offers. Presets become
-  *rigs*: a set of modules plus their settings. Teenage Engineering's OP-1 and
-  the modular-app instruments (Chassis, The Phono Loop) are the reference.
-- **Breath module.** A pacer that guides the breath, visually and in sound:
-  4 in → 8 out, 5 in → 10 out, or custom; the soundscape can swell and fall
-  with it.
+  *rigs*: a set of modules plus their settings. References: Teenage
+  Engineering's OP-Z (fixed slots with swappable engines, and *control*
+  tracks, the model for Breath, Sleep and Timer modules) and OP-1 field;
+  k.odk's seven iPhone instruments (one shared grammar, presets that store the
+  whole instrument); FFOSSO's playful one-idea engines over a modular grid.
+  (Chassis by Lux Cache is a desktop semi-modular synth; The Phono Loop makes
+  Kontakt sample instruments, whose lesson is "the fewer pages the better".)
+- **Breath module.** A pacer that guides the breath, visually and in sound;
+  the soundscape can swell and fall with it. Default **5 in · 5 out** (6
+  breaths a minute, the evidence-based centre), then 4 in · 6 out (also 6 a
+  minute), 4 in · 8 out (5 a minute), 5 in · 10 out (4 a minute, labelled
+  *advanced*: slower than the usual 4.5–6.5 range), and custom.
 - **Cardiac coherence.** Slow, even breathing around six breaths a minute
   (the "365" practice: 3 times a day, 6 breaths a minute, 5 minutes), as a
   module of its own. Guy Desbiolles' teaching on cardiac coherence and the
@@ -68,7 +76,9 @@ soundscape or a teaching tool depending on which modules are in it.
   What the evidence does and doesn't support goes in RESEARCH.md before any
   claim goes on screen.
 - **Sleep.** A sleep timer that fades the soundscape out over a long arc
-  (as Endel does), and a "stays on all night" mode.
+  (10–60 minutes, high frequencies first, as Eno and Chilvers' Bloom has a
+  sleep timer), and a quiet "stays on all night" mode with no sudden sounds
+  and no binaural beats.
 - **Five Elements: rhythm and tempo.** Each element (earth, water, fire,
   air, space) as a set of qualities the soundscape can take on: density,
   tempo, register, brightness, movement. Possibly beat-matched pulses.
@@ -96,9 +106,11 @@ speed, direction and level) with:
 - **Bernie Krause: the spectrograph.** See the whole soundscape's spectrogram;
   select regions of time and frequency to keep or remove in each loop; see
   where there's space left: *did you leave room for the voice?* (Krause's
-  niche hypothesis: in a healthy habitat each creature sings in its own band.)
+  niche hypothesis suggests that in a healthy habitat each creature finds its
+  own band or its own moment to sing; the idea is partly supported and still
+  debated, and partitioning is often in time rather than pitch.)
   V1's "space" picture is the first step.
-- **The session arc.** Like Wavepaths (and Endel's bedtime timer): set a
+- **The session arc.** Like Wavepaths' arcs of phases: set a
   length and a shape, and the soundscape moves through it, from daytime
   birdsong to evening crickets, with fades that feel natural and seamless.
   Still generative, but guided: which recordings, how busy, what processing.

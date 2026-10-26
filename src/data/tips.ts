@@ -24,7 +24,7 @@ export const TIPS: TipSection[] = [
     tips: [
       { title: 'Why they matter', body: 'Without headphones the mic hears the soundscape too, and it\'s baked into your voice track. You can\'t rebalance it afterwards, and it doubles up when the two tracks are mixed.' },
       { title: 'Wired is best', body: 'Wired headphones have no delay, so you sing in time with what you hear. Any pair will do, even the ones that came with a phone.' },
-      { title: 'Bluetooth on a phone takes over the mic', body: 'With AirPods or other Bluetooth headphones, an iPhone often switches to the headphones\' own mic, which sounds thin. For the best voice, use wired headphones (with an adapter if needed) so the phone\'s own mic stays on.' },
+      { title: 'Bluetooth turns into a phone call', body: 'While the mic is on, an iPhone switches AirPods and other Bluetooth headphones into call mode: the soundscape drops to thin, mono call quality, and the voice may be recorded through the headphones\' mic instead of the phone\'s. For recording, use wired headphones (with an adapter if needed). Bluetooth is fine for just listening.' },
       { title: 'Keep them quiet', body: 'Closed headphones (over-ear, sealed) leak less than open ones. Keep the level comfortable: if you can hear the soundscape from a metre away, the mic can too.' },
       { title: 'Choose a different mic', body: 'Headphones with a mic built in don\'t have to be the mic. Under Input, choose the phone\'s or laptop\'s own mic, or your USB mic, and leave the headphones for listening (Output).' },
     ],

@@ -7,11 +7,12 @@
 //
 // The layer state (on/off and level for each) lives in App.tsx; this panel
 // shows it and asks the audio side (audio/layers.ts) to follow.
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LAYERS, type LayerDef } from '../data/layers.ts';
 import { getEngine, glide } from '../audio/engine.ts';
 import { startLayer, stopLayer, setLayerLevel } from '../audio/layers.ts';
 import { uploadSound } from '../audio/loop.ts';
+import { showNowPlaying } from '../audio/nowPlaying.ts';
 import type { Key } from '../data/keys.ts';
 import { LayerIcon, SpeakerIcon } from './Icons.tsx';
 import { Presets } from './Presets.tsx';
@@ -121,6 +122,22 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
   }
 
   const anyOn = all.some((d) => stateOf(d.id).on);
+
+  // The lock screen's "now playing": the layers sounding, and play/pause
+  // wired to the speaker's quiet / bring-back.
+  // Updated only when the sounding layers or the key change; the buttons go
+  // through a ref so they always use this render's hush / unhush.
+  const sounding = all.filter((d) => stateOf(d.id).on).map((d) => d.name).join('|');
+  const actions = useRef({ hush, unhush });
+  actions.current = { hush, unhush };
+  useEffect(() => {
+    showNowPlaying({
+      layers: sounding ? sounding.split('|') : [],
+      keyName: keyNow.name,
+      onPause: () => actions.current.hush(),
+      onPlay: () => actions.current.unhush(),
+    });
+  }, [sounding, keyNow.name]);
 
   return (
     <section className="panel" aria-labelledby="soundscape-h">

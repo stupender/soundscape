@@ -2,8 +2,9 @@
 //
 // A small spectrum: low pitches on the left, high on the right. The soundscape
 // is the soft grey hill; your voice is the coral line. Bernie Krause noticed
-// that in a healthy habitat each creature sings in its own band, leaving room
-// for the others (his "niche hypothesis"). The same goes for a voice over a
+// that in a healthy habitat each creature finds its own band, or its own
+// moment, leaving room for the others (his "niche hypothesis": partly
+// supported, still debated). The same goes for a voice over a
 // soundscape: if the grey piles up exactly where your coral is, turn down the
 // layers that crowd you. A first step toward the spectrograph in ROADMAP.md.
 import { useEffect, useRef } from 'react';
