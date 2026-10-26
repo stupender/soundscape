@@ -4,3 +4,7 @@ dist
 .DS_Store
 .claude/
 *.log
+
+# Deep-research working notes (may quote local books); the finished report is RESEARCH.md
+research_notes/
+reports/
