@@ -9,6 +9,7 @@
 // Audio interfaces often send two channels (input 1 and input 2). If yours
 // does, you can choose which one your mic is plugged into.
 import { getEngine } from './engine.ts';
+import { setAudioSessionType } from './iosSession.ts';
 
 export interface MicInfo {
   label: string;
@@ -39,8 +40,7 @@ export async function openMic(opts: MicOptions): Promise<MicInfo> {
   const { ctx, voice } = getEngine();
   // On iPhone and iPad, tell Safari we're both playing and recording, so the
   // soundscape keeps playing at full quality while the mic is open.
-  const nav = navigator as Navigator & { audioSession?: { type: string } };
-  if (nav.audioSession) nav.audioSession.type = 'play-and-record';
+  setAudioSessionType('play-and-record');
 
   stream = await navigator.mediaDevices.getUserMedia({
     audio: {
@@ -82,6 +82,8 @@ export function closeMic(): void {
   stream = null;
   source = splitter = null;
   picker = trimNode = null;
+  // Back to plain music playback (still plays with the ringer off).
+  setAudioSessionType('playback');
 }
 
 export function micIsOpen(): boolean {

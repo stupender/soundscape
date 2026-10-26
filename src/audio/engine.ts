@@ -19,6 +19,7 @@
 //
 // Browsers only allow sound after a tap, so the engine is made on first use,
 // from inside a click.
+import { playThroughSilentSwitch } from './iosSession.ts';
 import { airImpulse } from './noise.ts';
 
 export interface Engine {
@@ -54,6 +55,9 @@ export function getEngine(): Engine {
     if (engine.ctx.state === 'suspended') void engine.ctx.resume();
     return engine;
   }
+  // On an iPhone, declare this as music playback before any sound starts, so
+  // the ring/silent switch doesn't mute it (see iosSession.ts).
+  playThroughSilentSwitch();
   const ctx = new AudioContext({ latencyHint: 'interactive' });
 
   const bed = ctx.createGain();

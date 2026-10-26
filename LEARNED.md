@@ -24,3 +24,4 @@
 - **Spectrum on a log scale**: each octave gets equal width, which is how ears hear pitch. → `ui/Space.tsx`
 - **Percentile, not maximum**: Auto level takes the 97th-percentile peak, so one click or bump doesn't set the level for the whole take. → `audio/autoLevel.ts`
 - **useRef for a memory that doesn't redraw**: the speaker remembers what was playing before you quieted it in a ref, because changing it shouldn't redraw the page. → `beforeQuiet` in `ui/Soundscape.tsx`
+- **Audio session (iOS)**: a web page's sound is 'ambient' (muted by the silent switch) unless it says it's 'playback', as music apps do; Safari 16.4+ lets it say so, older iPhones need a silent <audio> loop. → `audio/iosSession.ts`
