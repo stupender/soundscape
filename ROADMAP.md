@@ -8,6 +8,19 @@ the claims the app must not make.
 
 ---
 
+## Platform direction
+
+The web app stays the open door: free, any device, nothing to install. But
+features that need more than a browser (live heart-rate straps, MIDI, hours
+of locked-screen playback, recording with Bluetooth headphones, Apple Health)
+can arrive **first in a macOS app**, which is where Stu works and teaches.
+iOS follows, on the App Store, once there's an **Apple Developer Program**
+membership (needed for both the Mac App Store and iOS). The route from this
+React code to macOS and iOS (Capacitor with Mac Catalyst, Electron as Archive
+uses, Tauri, or native Swift) is a research question; see RESEARCH.md.
+
+---
+
 ## V1 — the two-track recorder ✓ (live, beta)
 
 A soundscape plays in your headphones; any mic records your voice; the two
