@@ -165,6 +165,53 @@ the differentiator.
 
 ---
 
+## Beyond software — instruments, objects and installations
+
+**Why:** some of this wants to leave the screen. A soundscape that lives in
+an object on a shelf, a knob you turn instead of a slider you tap, a box you
+hand to a client for their room. Three uses, from small to large:
+
+- **Little experiments along the way.** Cheap, quick, playful: an Arduino
+  or ESP32 with a few knobs and buttons as a controller (it can act as a
+  USB-MIDI device, so the Mac app's MIDI play-along picks it up); alternate
+  firmware for a small synth (people are now "vibe-coding" firmware for
+  boards like the M-VAVE FM-1); a granular field-recording sampler on a
+  handheld like the TrimUI Brick (GrainBrick shows it can be done).
+- **Stu's own performance instrument.** The soundscape, the key and the
+  elements as physical controls: a box of knobs for layer levels, a key
+  selector, a pad for each element, Terry's number pad as real buttons.
+  Kind of Device and Teenage Engineering as the bar for how it looks and
+  feels.
+- **A box for a client's room.** The site-specific installation as a
+  hand-off: a small computer (a Raspberry Pi, say) runs Soundscape full
+  screen with no screen at all, starts on power-up, plays a session arc
+  all day, and offers one or two physical controls (a volume knob, a
+  "begin" button) and nothing else. Because Soundscape is a web app, the
+  same code runs inside; only the controls and the speakers change. This
+  is the most direct path from the V3 client mode to the Horizon rooms.
+
+**Objects to learn from:**
+- **The Buddha Machine** (FM3, 2005): a small plastic box that plays a
+  handful of loops forever. Eno is said to have bought several. The purest
+  form of "a soundscape in an object", and close kin to *Music for
+  Airports*' loops.
+- **Calm technology:** the Light Phone and Mudita (tools that do less, on
+  purpose), and **Loftie**, a bedside alarm clock with sleep sounds and no
+  phone. An **Endel-inspired, Soundscape bedside object**: field recordings
+  and a sleep fade at night, birdsong rising to wake you, a session bell for
+  practice, one knob and no screen.
+- Kind of Studio's devices, Teenage Engineering's pocket operators and field
+  system, and k.odk's single-idea instruments (from RESEARCH.md) as design
+  language.
+
+**Hardware to consider (to research before buying):** Raspberry Pi (runs
+the web app as is), Electrosmith Daisy Seed (purpose-built audio DSP for
+instruments and effects pedals), Bela (very low-latency audio on a small
+board), Teensy with its audio library, Arduino and ESP32 for controllers and
+sensors (including a heart-rate strap over Bluetooth, for biofeedback rooms).
+
+---
+
 ## Horizon — Immersive Art Spaces for Soul Retrieval
 
 - Rooms shaped by the **Five Elements** of the Tibetan Bön tradition, each
@@ -195,6 +242,13 @@ the differentiator.
 
 **Soundscape ecology**
 - [*The Great Animal Orchestra*, Bernie Krause](https://www.exploratorium.edu/TGAO) (Exploratorium exhibit), and the audiobook transcripts in `Archive/Ecology/Bernie Krause/`
+
+**Hardware, objects and firmware**
+- [How to vibe-code your own firmware for the M-VAVE FM-1](https://www.synthtopia.com/content/2026/11/03/how-to-vibe-code-your-own-firmware-for-the-m-vave-fm-1-synthesizer/) · [Synthtopia: alternate firmware](https://www.synthtopia.com/content/tag/alternate-firmware/)
+- [GrainBrick: granular field-recording app on the TrimUI Brick](https://www.elektronauts.com/t/grainbrick-a-granular-sampling-fieldrecording-app-on-trimui-brick-a-gameboy-clone-hardware/258189)
+- [Kind of Device](https://www.instagram.com/kindofdevice_/) · [an Instagram reference Stu shared](https://www.instagram.com/p/DeHkc5Am6Wz/?img_index=1)
+- [The Buddha Machine (Bandcamp Daily)](https://daily.bandcamp.com/features/the-buddha-machine-feature)
+- The Light Phone · Mudita · Loftie
 
 **Instruments, apps and studios**
 - [FFOSSO](https://www.ffosso.com) · [The Phono Loop](https://thephonoloop.com) · [Chassis by Lux Cache](https://luxcache.com/shop) · [k.odk's music apps](https://keiodak.github.io/privacy/links.html) ([Instagram](https://www.instagram.com/k_odk_/))
