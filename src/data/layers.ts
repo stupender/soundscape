@@ -44,13 +44,13 @@ export interface LayerDef {
 }
 
 export const LAYERS: LayerDef[] = [
-  { id: 'keys', name: 'Soundscape', note: 'in 12 keys · Point Reyes', icon: 'keys', tint: 'var(--night)', make: keyedSound((k) => `audio/keys/soundscape-${k.slug}.mp3`), gain: 1, pitched: true, image: 'images/point-reyes.jpg' },
-  { id: 'shruti', name: 'Shruti box', note: 'Alex Xander Jacobs', icon: 'shruti', tint: 'var(--clay)', make: keyedSound((k) => `audio/shruti/shruti-${k.slug}.mp3`), gain: 1, pitched: true },
-  { id: 'birds', name: 'Morning birds', note: 'Pennsylvania', icon: 'birds', tint: 'var(--sage)', make: fileSound('audio/field/birds-pennsylvania.mp3'), gain: 1 },
+  { id: 'keys', name: 'Soundscape', note: 'in 12 keys · Walking Distance Residency', icon: 'keys', tint: 'var(--night)', make: keyedSound((k) => `audio/keys/soundscape-${k.slug}.mp3`), gain: 1, pitched: true, image: 'images/point-reyes.jpg' },
+  { id: 'shruti', name: 'Shruti box', note: 'Monoj Kumar Sardar & Bros · Alex Xander Jackobs', icon: 'shruti', tint: 'var(--clay)', make: keyedSound((k) => `audio/shruti/shruti-${k.slug}.mp3`), gain: 1, pitched: true },
+  { id: 'birds', name: 'Morning birds', note: 'Pennsylvania Country House', icon: 'birds', tint: 'var(--sage)', make: fileSound('audio/field/birds-pennsylvania.mp3'), gain: 1 },
   { id: 'crickets', name: 'Evening crickets', note: 'Serenity Ridge, Virginia', icon: 'crickets', tint: 'var(--lav)', make: fileSound('audio/field/crickets-virginia.mp3'), gain: 1 },
   { id: 'ocean', name: 'Pacific Ocean', note: 'Monterey coast, Carmel', icon: 'ocean', tint: 'var(--slate)', make: fileSound('audio/field/ocean-monterey.mp3'), gain: 1 },
   { id: 'river', name: 'River', note: 'stone waterfall, Virginia', icon: 'river', tint: 'var(--riso-blue)', make: fileSound('audio/field/waterfall-virginia.mp3'), gain: 1 },
-  { id: 'storm', name: 'Thunderstorm', note: 'Illinois', icon: 'storm', tint: 'var(--night)', make: fileSound('audio/field/thunderstorm-illinois.mp3'), gain: 1.25 },
+  { id: 'storm', name: 'Thunderstorm', note: 'Illinois, Summer', icon: 'storm', tint: 'var(--night)', make: fileSound('audio/field/thunderstorm-illinois.mp3'), gain: 1.25 },
 ];
 
 /** A preset turns on a few layers at chosen levels (0–1). */
