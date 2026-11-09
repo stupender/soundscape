@@ -562,8 +562,24 @@ select option { background: var(--panel); color: var(--ink); }
 .seg-btn--on { background: var(--ink); color: var(--on-ink); }
 
 /* ---- Footer -------------------------------------------------------------- */
-/* The footer: one mono line saying takes stay on the device. */
+/* The footer: the Being Sound doors, then one mono line saying takes stay
+   on the device. */
 .foot { padding: 22px 2px 0; color: var(--muted); }
+.doors { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 14px 0; margin-bottom: 14px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--hair); }
+.doors-line { max-width: 560px; font-size: 13px; line-height: 1.5; color: var(--ink); }
+.doors-line a { color: inherit; text-underline-offset: 0.2em; }
+.doors-line a:hover { color: var(--accent); }
+
+/* SUBSCRIBE: the once-only invitation (in Takes) and the footer form. */
+.subscribe--invitation { margin: 0 0 14px; padding: 12px 14px; border: 1px solid var(--ink); }
+.subscribe-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.subscribe-blurb { font-size: 13px; line-height: 1.45; margin-bottom: 10px; }
+.subscribe-row { display: flex; align-items: center; gap: 10px; }
+.subscribe-field { flex: 1; min-width: 160px; }
+.subscribe--footer .subscribe-field { width: 220px; flex: none; }
+.subscribe-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.subscribe--done { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.subscribe-thanks { font-size: 13px; color: var(--ink); }
 .foot-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: var(--font-label); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
 .foot-line a { color: inherit; }
 

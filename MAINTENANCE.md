@@ -115,3 +115,31 @@ ffmpeg -ss 15 -t 260 -i "source.wav" -af "volume=GAINdB,alimiter=limit=0.89:leve
 2. Add an entry to `LAYERS` in `src/data/layers.ts`.
 3. If it needs a new icon, add a drawing to `src/ui/Icons.tsx` and its id to
    `IconId`.
+
+## The mailing list (Kit)
+
+The app sends emails to the same Kit form as beingsound.studio
+(`app.kit.com/forms/9739307`), with Kit's custom field `source` set to:
+
+| Source | Who |
+|---|---|
+| `soundscape` | joined from the app |
+| `soundscape-<word>` | arrived through a link with `?from=<word>`, e.g. `soundscape-voxmundi` |
+
+**Links for rooms.** Give each room its own link and Kit will show who came
+from where: `https://soundscapes.beingsound.studio/?from=voxmundi` for Silvia's
+students, `?from=workshop` on the workshop QR code, and so on (letters,
+numbers and dashes). The device remembers it, so a signup weeks later is still
+tagged.
+
+**Welcome emails (set up in Kit, not in code).** In Kit, add an automation:
+when the `source` field contains `soundscape`, send the Soundscape welcome
+email (thank them for using the app, one small practice, and an invitation to
+a Sound Session). Fretboard Constellations uses `source = fretboard` the same
+way. Without a welcome email, a signup leads nowhere.
+
+**The ask-once rule** lives in `src/store/asked.ts` (same as Fretboard
+Constellations). To test the invitation again on your own device, clear
+`soundscape.subscribed.v1` and `soundscape.invited.v1` from the site's
+storage.
+

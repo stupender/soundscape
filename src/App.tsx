@@ -22,6 +22,17 @@ import { Soundscape, type LayerState } from './ui/Soundscape.tsx';
 import { Takes } from './ui/Takes.tsx';
 import { Tips, guessSection } from './ui/Tips.tsx';
 import { Voice } from './ui/Voice.tsx';
+import { Subscribe } from './ui/Subscribe.tsx';
+import { alreadyAsked, hasSubscribed, markDismissed, rememberArrival } from './store/asked.ts';
+
+// THE DOORS into Being Sound, in the footer. The Sound Session link is the
+// live 60-minute booking page on cal.com.
+const SOUND_SESSION_URL = 'https://cal.com/stu-pender/sound-session-60m';
+const SUBSTACK_URL = 'https://beingsound.substack.com';
+
+// Remember ?from=… (e.g. ?from=voxmundi) before anything else, so a later
+// signup is tagged with the room this person came from (store/asked.ts).
+rememberArrival();
 
 // Terry's number pads are built (ui/Pads.tsx, audio/pads.ts) but set aside
 // for now to keep V1 simple. Set this to true to bring them back.
@@ -57,9 +68,18 @@ export default function App() {
 
   const sa = useCallback(() => saHz(key), [key]);
 
+  // The mailing-list invitation: once, right after the first saved take.
+  const [invite, setInvite] = useState(false);
+
   function addTake(take: Take) {
     setTakes((p) => [take, ...p]);
     setOpenTake(take.id);
+    if (!alreadyAsked()) setInvite(true);
+  }
+
+  function closeInvite() {
+    if (!hasSubscribed()) markDismissed();
+    setInvite(false);
   }
 
   return (
@@ -91,10 +111,22 @@ export default function App() {
             openId={openTake}
             setOpenId={setOpenTake}
             onDeleted={(id) => setTakes((p) => p.filter((t) => t.id !== id))}
+            invite={invite ? <Subscribe variant="invitation" onClose={closeInvite} /> : null}
           />
         </div>
       </main>
       <footer className="foot">
+        {/* BEING SOUND: the three doors, quiet and always here. */}
+        <div className="doors">
+          <p className="doors-line">
+            Soundscape is made by Stu Pender at{' '}
+            <a href="https://beingsound.studio" target="_blank" rel="noreferrer">Being Sound</a>.
+            For guidance with your own voice and listening, book a{' '}
+            <a href={SOUND_SESSION_URL} target="_blank" rel="noreferrer">1:1 Sound Session</a>, or read{' '}
+            <a href={SUBSTACK_URL} target="_blank" rel="noreferrer">the Substack</a>.
+          </p>
+          {!hasSubscribed() && !invite && <Subscribe variant="footer" />}
+        </div>
         <div className="foot-line">
           <span>Takes stay on this device. Nothing is uploaded.</span>
           <a href="https://beingsound.studio">beingsound.studio</a>

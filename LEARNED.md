@@ -28,3 +28,5 @@
 - **Persistent storage**: asking the browser (`navigator.storage.persist()`) to keep this site's data, so Safari doesn't clear takes after a week away. → `askToKeep` in `store/db.ts`
 - **Media Session API**: tells the lock screen and Control Center what's playing, and answers their play/pause buttons. → `audio/nowPlaying.ts`
 - **Screen Wake Lock**: keeps the phone from locking during a session; the browser drops it when the page is hidden, so ask again on return. → `keepAwake` in `audio/session.ts`
+- **Ask once, at a true moment**: the mailing-list invite appears after the first saved take (when "takes live only here" is true), and the device remembers the answer. → `store/asked.ts`, `ui/Subscribe.tsx`
+- **Query string**: the part of an address after `?`, read with `URLSearchParams`; `?from=voxmundi` tags where someone came from. → `rememberArrival` in `store/asked.ts`

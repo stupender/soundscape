@@ -50,6 +50,10 @@ public/       recorder-worklet.js, fonts, audio (keys/, shruti/, field/), images
   in the README, and only add one with the maker's permission: the repo and
   the site are public. The goal is all of Stu's own recordings.
 - **Deleting a take takes two clicks.** No `window.confirm`.
+- **Never a signup wall.** The app is the gift. The mailing list is offered
+  once, after the first saved take, then never again on that device
+  (`store/asked.ts`), plus a quiet footer. Same Kit list as the website, tagged
+  by `source`. See MAINTENANCE.md.
 - **No health or "brainwave" claims, ever.** Before writing any wording for
   breath, coherence, binaural beats or sleep, read "Claims the app must not
   make" at the end of RESEARCH.md and use its safe phrasing ("for relaxation
