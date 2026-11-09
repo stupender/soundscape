@@ -122,8 +122,8 @@ export default function App() {
             Soundscape is made by Stu Pender at{' '}
             <a href="https://beingsound.studio" target="_blank" rel="noreferrer">Being Sound</a>.
             For guidance with your own voice and listening, book a{' '}
-            <a href={SOUND_SESSION_URL} target="_blank" rel="noreferrer">1:1 Sound Session</a>, or read{' '}
-            <a href={SUBSTACK_URL} target="_blank" rel="noreferrer">the Substack</a>.
+            <a href={SOUND_SESSION_URL} target="_blank" rel="noreferrer">1:1 Sound Session</a>, and read about my work at
+            Being Sound on <a href={SUBSTACK_URL} target="_blank" rel="noreferrer">Substack</a>.
           </p>
           {!hasSubscribed() && !invite && <Subscribe variant="footer" />}
         </div>
