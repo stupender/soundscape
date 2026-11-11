@@ -19,6 +19,7 @@
 //
 // Browsers only allow sound after a tap, so the engine is made on first use,
 // from inside a click.
+import { fadeTo, holdNow } from './fades.ts';
 import { playThroughSilentSwitch } from './iosSession.ts';
 import { airImpulse } from './noise.ts';
 
@@ -118,12 +119,16 @@ export function ensureWorklet(): Promise<void> {
   return workletReady;
 }
 
-/** Glide a gain to a value over `seconds`, from wherever it is now. */
+/**
+ * Glide a gain to a value over `seconds`, from exactly where it is now.
+ * Longer glides follow the fade curve (fades.ts); quick ones (a hand on the
+ * master slider) are a short straight ramp.
+ */
 export function glide(param: AudioParam, value: number, seconds: number): void {
   const ctx = getEngine().ctx;
   const t = ctx.currentTime;
-  param.cancelScheduledValues(t);
-  param.setValueAtTime(param.value, t);
+  if (seconds >= 0.25) { fadeTo(ctx, param, value, seconds); return; }
+  holdNow(param, t);
   param.linearRampToValueAtTime(value, t + Math.max(seconds, 0.01));
 }
 

@@ -22,6 +22,7 @@
 // sound. The browser drops the lock whenever the page is hidden, so it's
 // asked for again when the page comes back.
 import { getEngine, glide } from './engine.ts';
+import { fadeAt, holdNow } from './fades.ts';
 
 /** One strike of the bowl at `when` (audio clock), pitched two octaves above Sa. */
 export function strike(sa: number, when: number, strength = 1): void {
@@ -98,10 +99,9 @@ export function startSession(minutes: number, sa: () => number): void {
   const t = ctx.currentTime;
   strike(getSa(), t + 0.2);
   // The soundscape rises beneath the ringing bell.
-  fade.gain.cancelScheduledValues(t);
-  fade.gain.setValueAtTime(0, t);
-  fade.gain.setValueAtTime(0, t + 2.5);
-  fade.gain.linearRampToValueAtTime(1, t + 14);
+  holdNow(fade.gain, t);
+  fade.gain.setValueAtTime(0, t + 0.002);
+  fadeAt(fade.gain, 0, 1, t + 2.5, 11.5);
   startedAt = performance.now();
   fadingOut = false;
   state = { running: true, total: minutes * 60, elapsed: 0 };
@@ -131,11 +131,9 @@ export function endSession(early: boolean): void {
   const strikes = early ? 1 : 3;
   for (let i = 0; i < strikes; i++) strike(getSa(), t + 0.4 + i * 4.5, i === strikes - 1 ? 1 : 0.85);
   // Leave the room quiet while the bells ring, then let the soundscape back.
-  fade.gain.cancelScheduledValues(t);
-  fade.gain.setValueAtTime(fade.gain.value, t);
-  fade.gain.linearRampToValueAtTime(0, t + 2);
-  fade.gain.setValueAtTime(0, t + strikes * 4.5 + 6);
-  fade.gain.linearRampToValueAtTime(1, t + strikes * 4.5 + 12);
+  holdNow(fade.gain, t);
+  fadeAt(fade.gain, fade.gain.value, 0, t + 0.002, 2);
+  fadeAt(fade.gain, 0, 1, t + strikes * 4.5 + 6, 6);
   state = { running: false, total: state.total, elapsed: state.elapsed };
   letSleep();
   tell();

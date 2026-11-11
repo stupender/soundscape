@@ -1,12 +1,14 @@
 // THE LAYER MANAGER — turns soundscape layers on and off, and sets how loud.
 //
 // Every running layer is its Sound plus one GainNode (its slider) feeding the
-// engine's `bed`. Turning a layer on fades it in over two seconds; turning it
-// off fades it out and then stops it, so nothing ever starts or ends with a
-// click. The UI only ever calls the four functions at the bottom.
+// engine's `bed`. Turning a layer on fades it in; turning it off fades it
+// into silence and then stops it, so nothing ever starts or ends with a
+// click or a sudden drop (the curves are in fades.ts). The UI only ever
+// calls the four functions at the bottom.
 import { saHz, type Key } from '../data/keys.ts';
 import type { LayerDef } from '../data/layers.ts';
 import { getEngine } from './engine.ts';
+import { FADE_IN, FADE_OUT, fadeTo, holdNow } from './fades.ts';
 import type { Sound } from './sound.ts';
 
 interface Running {
@@ -35,9 +37,7 @@ export async function startLayer(def: LayerDef, level: number, key: Key): Promis
     if (r.stopped) { sound.stop(); return; }
     r.sound = sound;
     sound.out.connect(gain);
-    const t = ctx.currentTime;
-    gain.gain.setValueAtTime(0, t);
-    gain.gain.linearRampToValueAtTime(curve(def, level), t + 2);
+    fadeTo(ctx, gain.gain, curve(def, level), FADE_IN, 0);
   } catch (err) {
     running.delete(def.id);
     gain.disconnect();
@@ -45,21 +45,18 @@ export async function startLayer(def: LayerDef, level: number, key: Key): Promis
   }
 }
 
-/** Turn a layer off: fade out, then stop it. */
+/** Turn a layer off: fade into silence, then stop it. */
 export function stopLayer(id: string): void {
   const r = running.get(id);
   if (!r) return;
   running.delete(id);
   r.stopped = true;
   const { ctx } = getEngine();
-  const t = ctx.currentTime;
-  r.gain.gain.cancelScheduledValues(t);
-  r.gain.gain.setValueAtTime(r.gain.gain.value, t);
-  r.gain.gain.linearRampToValueAtTime(0, t + 1.5);
+  fadeTo(ctx, r.gain.gain, 0, FADE_OUT);
   window.setTimeout(() => {
     r.sound?.stop();
     r.gain.disconnect();
-  }, 1700);
+  }, FADE_OUT * 1000 + 200);
 }
 
 /** Move a layer's slider. */
@@ -67,6 +64,8 @@ export function setLayerLevel(id: string, level: number): void {
   const r = running.get(id);
   if (!r) return;
   const { ctx } = getEngine();
+  // From exactly where it is, even halfway through fading in: no dip first.
+  holdNow(r.gain.gain, ctx.currentTime);
   r.gain.gain.setTargetAtTime(curve(r.def, level), ctx.currentTime, 0.08);
 }
 
