@@ -32,3 +32,4 @@
 - **Query string**: the part of an address after `?`, read with `URLSearchParams`; `?from=voxmundi` tags where someone came from. → `rememberArrival` in `store/asked.ts`
 - **Fading in decibels**: a straight-line volume fade sounds like a slow fade and then a sudden drop, because ears hear in decibels; draw the fade in dB to about −60 dB, then to nothing. → `audio/fades.ts`
 - **cancelAndHoldAtTime**: holds an AudioParam exactly where it is before a new change; without it, moving a slider during a fade-in dropped the sound for a moment. → `holdNow` in `audio/fades.ts`
+- **A dragged slider and automation**: holding a level and then starting a straight ramp, many times a second, makes Chrome lurch (choppy sound); hold, then glide toward the new level (`setTargetAtTime`). → `glide` in `audio/engine.ts`

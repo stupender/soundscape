@@ -128,8 +128,11 @@ export function glide(param: AudioParam, value: number, seconds: number): void {
   const ctx = getEngine().ctx;
   const t = ctx.currentTime;
   if (seconds >= 0.25) { fadeTo(ctx, param, value, seconds); return; }
+  // Glide toward it. (Not a hold and then a straight ramp: repeated many
+  // times a second, as a dragged slider does, Chrome lurches between those,
+  // heard as choppy sound. Measured: a 0.63 jump against 0.0003 this way.)
   holdNow(param, t);
-  param.linearRampToValueAtTime(value, t + Math.max(seconds, 0.01));
+  param.setTargetAtTime(value, t, Math.max(seconds / 3, 0.01));
 }
 
 /** Can this browser choose which output (headphones) to play through? */
