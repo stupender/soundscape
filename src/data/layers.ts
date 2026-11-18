@@ -22,12 +22,18 @@
 // they sit together; they loop with a crossfade. How they were cut is in
 // MAINTENANCE.md. To add another: drop an MP3 into public/audio/field/ and
 // add an entry with `make: fileSound('audio/field/name.mp3')`.
+//
+// BINAURAL is two pure tones made in the browser (audio/binaural.ts), one in
+// each ear: the left on the Key, the right a few hertz above it. Its tile has
+// a choice of beats (`binaural: true`). Its wording follows RESEARCH.md's
+// "Claims the app must not make": plain hertz, and "for headphones".
+import { binauralSound } from '../audio/binaural.ts';
 import { fileSound, keyedSound } from '../audio/loop.ts';
 import type { SoundMaker } from '../audio/sound.ts';
 
 export type IconId =
   | 'birds' | 'crickets' | 'ocean' | 'river' | 'storm'
-  | 'shruti' | 'keys' | 'upload';
+  | 'shruti' | 'keys' | 'binaural' | 'upload';
 
 export interface LayerDef {
   id: string;
@@ -41,6 +47,8 @@ export interface LayerDef {
   pitched?: boolean;
   /** A picture for the tile instead of a tint (in public/images/). */
   image?: string;
+  /** Shows the choice of beats on its tile (the binaural tones only). */
+  binaural?: boolean;
 }
 
 export const LAYERS: LayerDef[] = [
@@ -51,6 +59,7 @@ export const LAYERS: LayerDef[] = [
   { id: 'ocean', name: 'Pacific Ocean', note: 'Monterey coast, Carmel', icon: 'ocean', tint: 'var(--slate)', make: fileSound('audio/field/ocean-monterey.mp3'), gain: 1 },
   { id: 'river', name: 'River', note: 'stone waterfall, Virginia', icon: 'river', tint: 'var(--riso-blue)', make: fileSound('audio/field/waterfall-virginia.mp3'), gain: 1 },
   { id: 'storm', name: 'Thunderstorm', note: 'Illinois, Summer', icon: 'storm', tint: 'var(--night)', make: fileSound('audio/field/thunderstorm-illinois.mp3'), gain: 1.25 },
+  { id: 'binaural', name: 'Binaural', note: 'for headphones', icon: 'binaural', tint: 'var(--timber)', make: binauralSound(), gain: 1, pitched: true, binaural: true },
 ];
 
 /** A preset turns on a few layers at chosen levels (0–1). */

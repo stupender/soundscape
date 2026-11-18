@@ -6,7 +6,7 @@ A Being Sound Studio app.
 Turn on a few layers (Stu's own field recordings of morning birds in
 Pennsylvania, evening crickets and a stone waterfall in Virginia, the Pacific
 at Carmel, an Illinois thunderstorm; Alex Xander Jacobs's shruti box; or his
-*Soundscape in 12 Keys*), put your
+*Soundscape in 12 Keys*; or two binaural tones on the Key), put your
 headphones on, and record your voice over them with whatever mic you have:
 the phone's own, a laptop's, a USB mic, or an audio interface. The voice and
 the soundscape are recorded as **two separate tracks**, so afterwards you can
@@ -21,7 +21,7 @@ device; nothing is uploaded.
 
 | | |
 |---|---|
-| **01 Soundscape** | Seven layers as tiles, each with its own level: five field recordings, the shruti box and the Soundscape in 12 Keys. Presets (Dawn, Dusk, Shore, Storm, Practice) that you can edit: **+** saves what's playing, **Edit** renames, updates or deletes. A speaker icon quiets everything, and brings it back. *Add your own*: any audio file from the device, looped with a crossfade. |
+| **01 Soundscape** | Eight layers as tiles, each with its own level: five field recordings, the shruti box, the Soundscape in 12 Keys, and **Binaural** (two pure tones, one in each ear, for headphones: the left on the Key, the right 1–14 or 40 Hz above it, chosen on the tile; the difference holds when the Key moves). Presets (Dawn, Dusk, Shore, Storm, Practice) that you can edit: **+** saves what's playing, **Edit** renames, updates or deletes. A speaker icon quiets everything, and brings it back. *Add your own*: any audio file from the device, looped with a crossfade. |
 | **Key** | One key for the whole room. The shruti box (a recording in each of the 12 keys), the bell and the *Soundscape in 12 Keys* all follow it. |
 | **Session** | A dropdown in the top bar: a bell to open, the soundscape rising beneath it, three bells to close (from Becoming's session timer). 5, 10, 20 or 30 minutes, or Custom (1–180). |
 | **02 Record** | Any mic, and on a two-input interface, Input 1 or 2. A level meter with a sweet spot, a trim with **Auto** (sing your loudest phrase for five seconds and the trim is set so it peaks around −10 dB), **Input monitoring**, and the browser's **Voice processing** (echo cancellation, noise suppression, auto gain) switched **off** by default (it harms singing). The **space** picture shows where the soundscape sits and where your voice sits, so you can leave room for it. Record with the button or the space bar; the app asks about headphones first. |
@@ -54,5 +54,6 @@ toward immersive rooms. See [ROADMAP.md](ROADMAP.md).
 - Type: Ortica Linear, Ronzino and Necto Mono by [Collletttivo](https://www.collletttivo.it/typefaces) (SIL Open Font License; licences in `public/fonts/`).
 - The *Soundscape in 12 Keys* excerpts and the field recordings are Stu Pender's. All rights reserved.
 - The shruti box is Alex Xander Jacobs, *Shruti Box Drone All 12 Tones* (2016), used with permission: [musicforspiritualpractice.bandcamp.com](https://musicforspiritualpractice.bandcamp.com). Credited on its card in the app. For now: Stu's own shruti box recordings will replace it.
+- The binaural tones are made in the browser (pure sine tones; after Soundscape Live's binaural pair).
 - The bell comes from Becoming.
 - MP3 encoding: [@breezystack/lamejs](https://www.npmjs.com/package/@breezystack/lamejs) (LGPL).

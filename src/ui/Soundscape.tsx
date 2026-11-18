@@ -14,6 +14,7 @@ import { startLayer, stopLayer, setLayerLevel } from '../audio/layers.ts';
 import { uploadSound } from '../audio/loop.ts';
 import { showNowPlaying } from '../audio/nowPlaying.ts';
 import type { Key } from '../data/keys.ts';
+import { BeatPick } from './BeatPick.tsx';
 import { LayerIcon, SpeakerIcon } from './Icons.tsx';
 import { Presets } from './Presets.tsx';
 
@@ -178,6 +179,7 @@ export function Soundscape({ keyNow, layers, setLayers, uploads, setUploads, mas
               </span>
               <span className="tile-name">{def.name}</span>
               <span className="tile-note">{def.note}</span>
+              {def.binaural && <BeatPick keyNow={keyNow} />}
               <input
                 type="range" min={0} max={1} step={0.01} value={s.level}
                 onChange={(e) => setLevel(def.id, Number(e.target.value))}

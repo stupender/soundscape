@@ -26,6 +26,7 @@ export const TIPS: TipSection[] = [
       { title: 'Wired is best', body: 'Wired headphones have no delay, so you sing in time with what you hear. Any pair will do, even the ones that came with a phone.' },
       { title: 'Bluetooth turns into a phone call', body: 'While the mic is on, an iPhone switches AirPods and other Bluetooth headphones into call mode: the soundscape drops to thin, mono call quality, and the voice may be recorded through the headphones\' mic instead of the phone\'s. For recording, use wired headphones (with an adapter if needed). Bluetooth is fine for just listening.' },
       { title: 'Keep them quiet', body: 'Closed headphones (over-ear, sealed) leak less than open ones. Keep the level comfortable: if you can hear the soundscape from a metre away, the mic can too.' },
+      { title: 'Binaural needs both ears', body: 'The Binaural tile puts one tone in each ear, so it needs stereo headphones; on a speaker the two tones mix. On a phone, Bluetooth headphones turn mono while the mic is on, so for recording with it, use wired ones.' },
       { title: 'Choose a different mic', body: 'Headphones with a mic built in don\'t have to be the mic. Under Input, choose the phone\'s or laptop\'s own mic, or your USB mic, and leave the headphones for listening (Output).' },
     ],
   },

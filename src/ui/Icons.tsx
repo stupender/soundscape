@@ -57,6 +57,12 @@ const paths: Record<IconId, React.ReactNode> = {
       <circle cx="24" cy="24" r="18" />
     </>
   ),
+  binaural: (
+    <>
+      <path d="M4 18c2.5-5 5-5 7.5 0s5 5 7.5 0 5-5 7.5 0 5 5 7.5 0 5-5 7.5 0" />
+      <path d="M4 30c2.2-5 4.3-5 6.5 0s4.3 5 6.5 0 4.3-5 6.5 0 4.3 5 6.5 0 4.3-5 6.5 0 4.3 5 6.5 0" />
+    </>
+  ),
   upload: (
     <>
       <path d="M24 32V10M16 18l8-8 8 8" />
