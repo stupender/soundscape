@@ -1,16 +1,18 @@
-// TUNE — a simple tuner in the Record panel (Voice.tsx), under the trim,
-// while the mic is on. Switched on, it shows the note you're singing or
+// TUNE — a simple tuner in the Record panel (Voice.tsx), a ruled row under
+// Input and Output, always there. Switched on (with the mic on), it shows the note you're singing or
 // playing in the soundscape's key (Sa, Re, Ga… for the key's own notes,
 // the plain note names beside them), how many cents sharp or flat, and a
 // needle that settles in the middle. "Hear Sa" sounds the Key's Sa as a
 // clean tone, to find your note before you begin. (Soundscape Live has the
 // fuller tuner, and the overtone fork.)
 //
-// It reads the mic's analyser about twenty times a second and finds the
-// pitch (audio/pitchFind.ts), keeping the middle of the last five readings.
+// It follows the pitch steadily (audio/pitchTrack.ts: it glides, ignores
+// stray readings and octave slips, and holds a fading note a moment). The
+// needle eases there every frame; the words change ten times a second.
+// Within five cents, the note and the needle turn green.
 import { useEffect, useRef, useState } from 'react';
 import { getEngine } from '../audio/engine.ts';
-import { findPitch } from '../audio/pitchFind.ts';
+import { trackPitch } from '../audio/pitchTrack.ts';
 import { KEYS, saHz } from '../data/keys.ts';
 import { readPref, writePref } from '../store/prefs.ts';
 
@@ -33,30 +35,43 @@ function hearTone(hz: number) {
   o.stop(t + 2.6);
 }
 
-export function TuneRow({ keyName }: { keyName: string }) {
+export function TuneRow({ keyName, micOn }: { keyName: string; micOn: boolean }) {
   const [on, setOnState] = useState<boolean>(() => readPref('tune.on', false));
   const setOn = (v: boolean) => { setOnState(v); writePref('tune.on', v); };
   const [hz, setHz] = useState<number | null>(null);
-  const recent = useRef<number[]>([]);
+  const live = useRef<number | null>(null);
+  const needle = useRef<HTMLElement>(null);
   const key = KEYS.find((k) => k.name === keyName) ?? KEYS[0];
 
+  // Follow the pitch while it's on and the mic is open.
   useEffect(() => {
-    if (!on) { setHz(null); return; }
+    if (!on || !micOn) { live.current = null; setHz(null); return; }
     const { ctx, voiceAnalyser } = getEngine();
-    const buf = new Float32Array(voiceAnalyser.fftSize);
-    let raf = 0, last = 0;
-    const tick = (t: number) => {
-      raf = requestAnimationFrame(tick);
-      if (t - last < 50) return;
-      last = t;
-      voiceAnalyser.getFloatTimeDomainData(buf);
-      const f = findPitch(buf, ctx.sampleRate, 60, 1400);
-      if (!f) { if (recent.current.length) { recent.current = []; setHz(null); } return; }
-      recent.current = [...recent.current.slice(-4), f.hz];
-      const s = [...recent.current].sort((a, b) => a - b);
-      setHz(s[Math.floor(s.length / 2)]);
+    let shownAt = 0, had = false;
+    return trackPitch(voiceAnalyser, ctx.sampleRate, (f) => {
+      live.current = f;
+      const t = performance.now();
+      if (t - shownAt > 100 || (f !== null) !== had) { shownAt = t; had = f !== null; setHz(f); }
+    }, 60, 1400);
+  }, [on, micOn]);
+
+  // The needle eases toward where you are, every frame.
+  useEffect(() => {
+    if (!on) return;
+    let raf = 0, at = 0;
+    const draw = () => {
+      raf = requestAnimationFrame(draw);
+      const el = needle.current, f = live.current;
+      if (!el) return;
+      if (f === null) { el.style.opacity = '0'; return; }
+      const m = 69 + 12 * Math.log2(f / 440);
+      const c = Math.max(-50, Math.min(50, (m - Math.round(m)) * 100));
+      at += (c - at) * 0.25;
+      el.style.opacity = '1';
+      el.style.left = `${50 + at}%`;
+      el.classList.toggle('tune-needle--ok', Math.abs(c) <= 5);
     };
-    raf = requestAnimationFrame(tick);
+    raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
   }, [on]);
 
@@ -80,14 +95,14 @@ export function TuneRow({ keyName }: { keyName: string }) {
       </div>
       {on && (
         <div className="tune-read" aria-live="polite">
-          <div className="tune-note">
+          <div className={`tune-note ${inTune ? 'tune-note--ok' : ''}`}>
             <b>{hz ? degree : '—'}</b>
-            <span>{hz ? `${NOTES[pc]}${Math.floor(near / 12) - 1} · ${cents > 0 ? '+' : cents < 0 ? '−' : ''}${Math.abs(cents)} ¢` : 'sing or play a note'}</span>
-            {inTune && <span className="led led--on" aria-label="In tune" />}
+            <span>{hz ? `${NOTES[pc]}${Math.floor(near / 12) - 1} · ${cents > 0 ? '+' : cents < 0 ? '−' : ''}${Math.abs(cents)} ¢` : micOn ? 'sing or play a note' : 'turn the mic on (Input, above)'}</span>
+            {inTune && <span className="led led--tune" aria-label="In tune" />}
           </div>
           <div className="tune-bar" aria-hidden="true">
             <i className="tune-mid" />
-            {hz !== null && <i className={`tune-needle ${inTune ? 'tune-needle--ok' : ''}`} style={{ left: `${50 + Math.max(-50, Math.min(50, cents))}%` }} />}
+            <i ref={needle} className="tune-needle" style={{ opacity: 0 }} />
           </div>
           <div className="tune-ends"><span>flat</span><span>in tune</span><span>sharp</span></div>
         </div>

@@ -635,6 +635,8 @@ select option { background: var(--panel); color: var(--ink); }
 .tune-note .led { align-self: center; }
 .tune-bar { position: relative; height: 14px; border-bottom: 1px solid var(--hair-strong); margin: 8px 0 4px; }
 .tune-mid { position: absolute; left: 50%; bottom: 0; height: 14px; border-left: 1px solid var(--ink); }
-.tune-needle { position: absolute; bottom: -3px; width: 2px; height: 18px; margin-left: -1px; background: var(--accent); transition: left 0.08s linear; }
-.tune-needle--ok { box-shadow: 0 0 8px var(--accent); }
+.tune-needle { position: absolute; bottom: -3px; width: 2px; height: 18px; margin-left: -1px; background: var(--accent); }
+.tune-needle--ok { background: var(--in-tune); box-shadow: 0 0 8px var(--in-tune); }
+.tune-note--ok b, .tune-note--ok span { color: var(--in-tune); }
+.led--tune { background: var(--in-tune); border-color: var(--in-tune); box-shadow: 0 0 10px var(--in-tune); }
 .tune-ends { display: flex; justify-content: space-between; font-family: var(--font-label); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }

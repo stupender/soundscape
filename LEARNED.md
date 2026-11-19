@@ -38,3 +38,7 @@
   itself shifted by each lag; the first strong match is one period (the
   McLeod method), and a parabola through it finds it to a cent. →
   `src/audio/pitchFind.ts`, `src/ui/TuneRow.tsx`
+- A steady tuner smooths the pitch: glide part of the way each reading
+  (less once close), take a new note only when two readings agree, ignore
+  a sudden octave; the needle moves through a ref every frame, not React
+  state. → `src/audio/pitchTrack.ts`, `src/ui/TuneRow.tsx`

@@ -26,6 +26,7 @@
   --hair: rgb(24 24 24 / 0.11);
   --hair-strong: rgb(24 24 24 / 0.3);
   --accent: rgb(228 107 108);
+  --in-tune: #3f8f44;
   --on-accent: #fff;
   --hot: #d2392b;
   --space-bed: rgb(24 24 24 / 0.13);
@@ -58,11 +59,13 @@
     --hair-strong: rgb(226 226 226 / 0.28);
     --space-bed: rgb(226 226 226 / 0.15);
     --mark-ink: #6a7fd0;
+    --in-tune: #58ad5c;
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
   --ground: #141414;
+  --in-tune: #58ad5c;
   --panel: #1d1d1d;
   --raised: #262626;
   --sunk: #0f0f0f;
