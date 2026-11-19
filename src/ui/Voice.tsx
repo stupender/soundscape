@@ -11,6 +11,7 @@
 // 3. Trim sets the level by hand; Auto listens to you sing for five seconds
 //    and sets it for you (audio/autoLevel.ts).
 // 3. Watch the meter, set the trim, glance at the "space" picture.
+// 3b. Tune (TuneRow.tsx): a simple tuner, in the Key, while the mic is on.
 // 4. Record (or press the space bar). The headphones question comes first,
 //    until you tell it not to ask.
 import { useCallback, useEffect, useState } from 'react';
@@ -27,6 +28,7 @@ import { readPref, writePref } from '../store/prefs.ts';
 import { HeadphonesPrompt } from './HeadphonesPrompt.tsx';
 import { Meter } from './Meter.tsx';
 import { Space } from './Space.tsx';
+import { TuneRow } from './TuneRow.tsx';
 
 interface Props {
   keyName: string;
@@ -266,6 +268,7 @@ export function Voice({ keyName, onTake, onMic, openTips }: Props) {
           <p className={`quiet level-note ${listening !== null ? 'level-note--live' : ''}`} aria-live="polite">
             {listening !== null ? 'Listening… sing your loudest phrase.' : levelNote}
           </p>
+          <TuneRow keyName={keyName} />
           <div className="switches switches--stack">
             <label className="switch">
               <input type="checkbox" checked={hearSelf} onChange={(e) => changeHearSelf(e.target.checked)} />

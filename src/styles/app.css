@@ -622,3 +622,19 @@ select option { background: var(--panel); color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Tune (TuneRow.tsx): a simple tuner in the Record panel. Your voice is
+   coral: the needle; in tune, the lit LED. */
+.btn--on { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.tune-row { margin: 4px 0 10px; }
+.tune-switch { display: flex; align-items: center; gap: 10px; }
+.tune-read { padding: 6px 0 2px; }
+.tune-note { display: flex; align-items: baseline; gap: 12px; }
+.tune-note b { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1; min-width: 1.6em; }
+.tune-note span { font-family: var(--font-label); font-size: 12px; color: var(--muted); }
+.tune-note .led { align-self: center; }
+.tune-bar { position: relative; height: 14px; border-bottom: 1px solid var(--hair-strong); margin: 8px 0 4px; }
+.tune-mid { position: absolute; left: 50%; bottom: 0; height: 14px; border-left: 1px solid var(--ink); }
+.tune-needle { position: absolute; bottom: -3px; width: 2px; height: 18px; margin-left: -1px; background: var(--accent); transition: left 0.08s linear; }
+.tune-needle--ok { box-shadow: 0 0 8px var(--accent); }
+.tune-ends { display: flex; justify-content: space-between; font-family: var(--font-label); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }

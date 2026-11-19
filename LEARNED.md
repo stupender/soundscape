@@ -34,3 +34,7 @@
 - **cancelAndHoldAtTime**: holds an AudioParam exactly where it is before a new change; without it, moving a slider during a fade-in dropped the sound for a moment. → `holdNow` in `audio/fades.ts`
 - **A dragged slider and automation**: holding a level and then starting a straight ramp, many times a second, makes Chrome lurch (choppy sound); hold, then glide toward the new level (`setTargetAtTime`). → `glide` in `audio/engine.ts`
 - **Binaural tones**: one pure tone in each ear, a few hertz apart, heard as a slow pulse; a ChannelMerger puts each oscillator in its own ear, and gliding both with the same time constant keeps the difference exact while the Key moves. → `audio/binaural.ts`
+- Finding the pitch of a sung or played note: compare the sound with
+  itself shifted by each lag; the first strong match is one period (the
+  McLeod method), and a parabola through it finds it to a cent. →
+  `src/audio/pitchFind.ts`, `src/ui/TuneRow.tsx`
