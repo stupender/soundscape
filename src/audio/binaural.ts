@@ -12,15 +12,24 @@
 // public website, so here the two tones are made by the browser itself: one
 // OscillatorNode per ear, a pure sine, the same sound those files hold.
 //
-// The beats are Live's: 1–14 Hz in whole hertz, and 40 Hz. On screen they are
-// plain hertz only, no claims about what they do (RESEARCH.md, "Claims the
-// app must not make"). It needs headphones: on a speaker the two ears mix.
+// The choice is five beats under their usual names, Delta, Theta, Alpha, Beta
+// and Gamma, each at the hertz Live starts that band on. The names are only
+// names for frequencies: nothing on screen says what they do (RESEARCH.md,
+// "Claims the app must not make"). It needs headphones: on a speaker the two
+// ears mix.
 import type { Key } from '../data/keys.ts';
 import { readPref, writePref } from '../store/prefs.ts';
 import type { Sound, SoundMaker } from './sound.ts';
 
-/** The beats you can choose, in hertz. */
-export const BEATS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 40];
+/** The beats you can choose: a name and its beat in hertz. */
+export const BANDS = [
+  { name: 'Delta', hz: 2 },
+  { name: 'Theta', hz: 6 },
+  { name: 'Alpha', hz: 10 },
+  { name: 'Beta', hz: 14 },
+  { name: 'Gamma', hz: 40 },
+];
+const BEATS = BANDS.map((b) => b.hz);
 
 /** The beat a first visit starts on. */
 const FIRST_BEAT = 6;

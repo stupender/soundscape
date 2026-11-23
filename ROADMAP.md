@@ -88,7 +88,7 @@ soundscape or a teaching tool depending on which modules are in it.
   soundscape; tuned to the Key. Needs headphones (the app already asks).
   What the evidence does and doesn't support goes in RESEARCH.md before any
   claim goes on screen. *First step built (2026-11-17): the Binaural tile,
-  Soundscape Live's beats (1–14 and 40 Hz) in plain hertz, no claims.*
+  five beats by name and hertz (Delta 2 Hz to Gamma 40 Hz), no claims.*
 - **Sleep.** A sleep timer that fades the soundscape out over a long arc
   (10–60 minutes, high frequencies first, as Eno and Chilvers' Bloom has a
   sleep timer), and a quiet "stays on all night" mode with no sudden sounds

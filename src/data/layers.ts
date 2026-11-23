@@ -25,8 +25,9 @@
 //
 // BINAURAL is two pure tones made in the browser (audio/binaural.ts), one in
 // each ear: the left on the Key, the right a few hertz above it. Its tile has
-// a choice of beats (`binaural: true`). Its wording follows RESEARCH.md's
-// "Claims the app must not make": plain hertz, and "for headphones".
+// a choice of five beats, Delta to Gamma (`binaural: true`). Its wording
+// follows RESEARCH.md's "Claims the app must not make": names and hertz only,
+// nothing about what they do, and "for headphones".
 import { binauralSound } from '../audio/binaural.ts';
 import { fileSound, keyedSound } from '../audio/loop.ts';
 import type { SoundMaker } from '../audio/sound.ts';
